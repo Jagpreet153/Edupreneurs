@@ -4,28 +4,30 @@ import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import photo from "../../assets/login_image.png";
-
+import axios from 'axios'
 // eslint-disable-next-line react/prop-types
 function Login({setIsLoggedIn}) {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setemail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  function changeHandler(event) {
-    setFormData((prevdata) => ({
-      ...prevdata,
-      [event.target.name]: event.target.value,
-    }));
-  }
   function submitHandler(event) {
-    event.preventDefault();
-    setIsLoggedIn(true);
-    toast.success("Logged in successfully");
-    navigate("/dashboard");
+     event.preventDefault();
+    try {
+      axios.post("http://localhost:3000/api/v2/checkUser",{email,password}) 
+     .then(()=>{
+      toast.success("Logged in successfully");
+       navigate('/dashboard')
+     })
+     .catch(()=>{
+     toast.error("Kindly check Email / Password");
+    })
+     }
+ catch(err){
+     console.log("error occured");
+ }
   }
 
   return (
@@ -58,8 +60,8 @@ function Login({setIsLoggedIn}) {
               <input
                 required
                 type="email"
-                value={formData.email}
-                onChange={changeHandler}
+                value={email}
+                onChange={(e)=>setemail(e.target.value)}
                 placeholder="Email"
                 name="email"
                 className="rounded-xl text-white w-full p-[1vw]"
@@ -72,8 +74,8 @@ function Login({setIsLoggedIn}) {
               <input
                 required
                 type={showPassword ? "text" : "password"}
-                value={formData.password}
-                onChange={changeHandler}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 placeholder="********"
                 name="password"
                 className="rounded-xl text-white w-full p-[1vw]"

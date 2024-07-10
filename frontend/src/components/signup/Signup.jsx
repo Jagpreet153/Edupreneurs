@@ -4,36 +4,49 @@ import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import photo from "../../assets/login_image.png";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 function Signup({setIsLoggedIn}) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
+  const [confirmPassword,setConfirmPassword]=useState("");
+  
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  function changeHandler(event) {
-    setFormData((prevdata) => ({
-      ...prevdata,
-      [event.target.name]: event.target.value,
-    }));
-  }
 
   function submitHandler(event) {
     event.preventDefault();
     setIsLoggedIn(true);
-    if (formData.password != formData.confirmPassword) {
-      toast.error("Passwords do not match.");
-    } else {
-      toast.success("Account created successfully");
-      navigate("/dashboard");
-    }
+    const details={
+      name:name,
+      email:email,
+      password:password,
+
+    };
+   
+     
+  try{
+      const response= axios.post("http://localhost:3000/api/v2/createUser",details) 
+      .then(()=>{
+          console.log("Sucessfully SignUp.");
+          toast.success("Account created successfully");
+          console.log(response);
+          navigate('/login')
+      })
+      .catch(()=>{
+        toast.error("Account already exists");
+      })
+     
+      }
+  catch(err){
+      toast.error("Error occured");     
+  }
+
   }
 
   return (
@@ -66,8 +79,8 @@ function Signup({setIsLoggedIn}) {
               <input
                 required
                 type="text"
-                value={formData.name}
-                onChange={changeHandler}
+                value={name}
+                onChange={(e)=>setName(e.target.value)}
                 placeholder="Name"
                 name="name"
                 className="rounded-xl text-white w-full p-[1vw]"
@@ -80,8 +93,8 @@ function Signup({setIsLoggedIn}) {
               <input
                 required
                 type="email"
-                value={formData.email}
-                onChange={changeHandler}
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
                 placeholder="Email"
                 name="email"
                 className="rounded-xl text-white w-full p-[1vw]"
@@ -94,8 +107,8 @@ function Signup({setIsLoggedIn}) {
               <input
                 required
                 type={showPassword ? "text" : "password"}
-                value={formData.password}
-                onChange={changeHandler}
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 placeholder="********"
                 name="password"
                 className="rounded-xl text-white w-full p-[1vw]"
@@ -114,8 +127,8 @@ function Signup({setIsLoggedIn}) {
               <input
                 required
                 type={showConfirmPassword ? "text" : "password"}
-                value={formData.confirmPassword}
-                onChange={changeHandler}
+                value={confirmPassword}
+                onChange={(e)=>setConfirmPassword(e.target.value)}
                 placeholder="********"
                 name="confirmPassword"
                 className="rounded-xl text-white w-full p-[1vw]"
