@@ -36,7 +36,7 @@ function Signup() {
 
   return (
     <div className="overflow-hidden flex justify-center">
-      <div className="flex items-center flex-col w-11/12 max-w-[1160px] mb-[4vw]">
+      <div className="flex items-center flex-col max-w-[80vw] mb-[4vw]">
         <h1 className="mt-[4vw] mb-[2vw] text-white font-bold text-4xl text-center">
           Join [Platform Name] Today
         </h1>
@@ -52,13 +52,13 @@ function Signup() {
             <Link to={"/login"}> Login</Link>
           </span>
         </p>
-        <div className="flex w-full gap-x-[16vw]">
+        <div className="flex flex-col sm:flex-row w-full gap-x-[16vw]">
           <form
             onSubmit={submitHandler}
-            className="w-[32vw] flex flex-col gap-y-4 mt-6"
+            className="w-full sm:w-[32vw] flex flex-col gap-y-4 mt-6"
           >
             <label>
-              <p className="text-base text-white mb-[1vw] leading-3">
+              <p className="text-base text-white mb-[1vw] leading-5">
                 Name<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -72,7 +72,7 @@ function Signup() {
               />
             </label>
             <label>
-              <p className="text-base text-white mb-[1vw] leading-3">
+              <p className="text-base text-white mb-[1vw] leading-5">
                 Email Address<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -86,7 +86,7 @@ function Signup() {
               />
             </label>
             <label className="relative">
-              <p className="text-base text-white mb-[1vw] leading-3">
+              <p className="text-base text-white mb-[1vw] leading-5">
                 Create Password<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -99,14 +99,14 @@ function Signup() {
                 className="rounded-xl text-white w-full p-[1vw]"
               />
               <span
-                className="absolute right-4 text-white top-11 scale-125"
+                className="absolute right-4 text-white top-11 scale-125 opacity-50"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
               </span>
             </label>
             <label className="relative">
-              <p className="text-base text-white mb-[1vw] leading-3">
+              <p className="text-base text-white mb-[1vw] leading-5">
                 Confirm Password<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -119,7 +119,7 @@ function Signup() {
                 className="rounded-xl text-white w-full p-[1vw]"
               />
               <span
-                className="absolute right-4 text-white top-11 scale-125"
+                className="absolute right-4 text-white top-11 scale-125 opacity-50"
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
               >
                 {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
@@ -128,11 +128,11 @@ function Signup() {
             <input
               type="submit"
               value="Create Account"
-              className="btn w-[40%] bg-orange-500 hover:bg-orange-400 text-black font-semibold"
+              className="btn mt-[1vw] mb-[4vw] bg-orange-500 hover:bg-orange-400 text-black font-semibold"
             />
           </form>
           <div className="flex justify-center items-center">
-            <img className="w-[32vw]" src={photo} alt="" />
+            <img className="w-[60vw]  sm:w-[32vw]" src={photo} alt="" />
           </div>
         </div>
       </div>
