@@ -28,7 +28,7 @@ function Login() {
 
   return (
     <div className="overflow-hidden flex justify-center">
-      <div className="max-w-[80vw] flex items-center flex-col mb-[4vw]">
+      <div className="max-w-[80vw] flex items-center flex-col mb-[4vw] ">
         <h1 className="mt-[8vw] mb-[2vw] text-white font-bold text-4xl text-center">
           Unlock Your Learning Potential with [Platform Name]
         </h1>
@@ -95,7 +95,7 @@ function Login() {
             />
           </form>
           <div className="flex justify-center items-center">
-            <img className="w-[60vw] sm:w-[32vw]" src={photo} alt="" />
+            <img className="w-[60vw]  sm:w-[32vw]" src={photo} alt="" />
           </div>
         </div>
       </div>

@@ -132,7 +132,7 @@ function Signup() {
             />
           </form>
           <div className="flex justify-center items-center">
-            <img className="w-[60vw] sm:w-[32vw]" src={photo} alt="" />
+            <img className="w-[60vw]  sm:w-[32vw]" src={photo} alt="" />
           </div>
         </div>
       </div>
