@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import photo from "../../assets/login_image.png";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -29,8 +30,7 @@ function Login() {
     <div className="overflow-hidden flex justify-center">
       <div className="max-w-[80vw] flex items-center flex-col">
         <h1 className="mt-[8vw] mb-[2vw] text-white font-bold text-4xl text-center">
-          {" "}
-          Unlock Your Learning Potential with [Platform Name]{" "}
+          Unlock Your Learning Potential with [Platform Name]
         </h1>
         <p className="mb-[2vw] text-white text-center">
           Welcome Back to [Platform Name], your gateway to seamless
@@ -44,41 +44,60 @@ function Login() {
             <Link to={"/signup"}> Create an Account</Link>
           </span>
         </p>
-        <form onSubmit={submitHandler}>
-          <label>
-            <p>
-              Email Address<sup>*</sup>
-            </p>
+        <div className="flex w-full gap-x-[16vw]">
+          <form
+            onSubmit={submitHandler}
+            className="w-[32vw] flex flex-col gap-y-4 mt-6"
+          >
+            <label>
+              <p className="text-base text-white mb-[1vw] leading-3">
+                Email Address<sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type="email"
+                value={formData.email}
+                onChange={changeHandler}
+                placeholder="Email"
+                name="email"
+                className="rounded-xl text-white w-full p-[1vw]"
+              />
+            </label>
+            <label className="relative">
+              <p className="text-base text-white mb-[1vw] leading-3">
+                Password<sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type={showPassword ? "text" : "password"}
+                value={formData.password}
+                onChange={changeHandler}
+                placeholder="********"
+                name="password"
+                className="rounded-xl text-white w-full p-[1vw]"
+              />
+              <span
+                className="absolute right-4 text-white top-11 scale-125"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? <GoEye /> : <GoEyeClosed />}
+              </span>
+              <Link to="#">
+                <p className="text-blue-400 hover:text-blue-500 text-xs mt-1 max-w-max ml-auto">
+                  Forgot Password
+                </p>
+              </Link>
+            </label>
             <input
-              required
-              type="email"
-              value={formData.email}
-              onChange={changeHandler}
-              placeholder="Email"
-              name="email"
+              type="submit"
+              value="Sign In"
+              className="btn w-[40%] bg-orange-500 hover:bg-orange-400 text-black font-semibold"
             />
-          </label>
-          <label>
-            <p>
-              Password<sup>*</sup>
-            </p>
-            <input
-              required
-              type={showPassword ? "text" : "password"}
-              value={formData.password}
-              onChange={changeHandler}
-              placeholder="********"
-              name="password"
-            />
-            <span onClick={() => setShowPassword((prev) => !prev)}>
-              {showPassword ? <GoEyeClosed /> : <GoEye />}
-            </span>
-            <Link to="#">
-              <p className="text-blue-400 hover:text-blue-500">Forgot Password</p>
-            </Link>
-          </label>
-          <input type="submit" value="Sign In" className="btn" />
-        </form>
+          </form>
+          <div className="flex justify-center items-center">
+            <img className="w-[32vw]" src={photo} alt="" />
+          </div>
+        </div>
       </div>
     </div>
   );

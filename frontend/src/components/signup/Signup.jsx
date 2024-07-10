@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import photo from "../../assets/login_image.png";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -25,19 +26,18 @@ function Signup() {
 
   function submitHandler(event) {
     event.preventDefault();
-    if(formData.password != formData.confirmPassword){
-        toast.error("Passwords do not match.");
-    }else{
-
-        toast.success("Account created successfully");
-        navigate("/login");
+    if (formData.password != formData.confirmPassword) {
+      toast.error("Passwords do not match.");
+    } else {
+      toast.success("Account created successfully");
+      navigate("/login");
     }
   }
 
   return (
     <div className="overflow-hidden flex justify-center">
-      <div className="max-w-[80vw] flex items-center flex-col">
-        <h1 className="mt-[8vw] mb-[2vw] text-white font-bold text-4xl text-center">
+      <div className="flex items-center flex-col w-11/12 max-w-[1160px] mb-[4vw]">
+        <h1 className="mt-[4vw] mb-[2vw] text-white font-bold text-4xl text-center">
           Join [Platform Name] Today
         </h1>
         <p className="mb-[2vw] text-white text-center">
@@ -52,67 +52,89 @@ function Signup() {
             <Link to={"/login"}> Login</Link>
           </span>
         </p>
-        <form onSubmit={submitHandler}>
-          <label>
-            <p>
-              Name<sup>*</sup>
-            </p>
+        <div className="flex w-full gap-x-[16vw]">
+          <form
+            onSubmit={submitHandler}
+            className="w-[32vw] flex flex-col gap-y-4 mt-6"
+          >
+            <label>
+              <p className="text-base text-white mb-[1vw] leading-3">
+                Name<sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type="text"
+                value={formData.name}
+                onChange={changeHandler}
+                placeholder="Name"
+                name="name"
+                className="rounded-xl text-white w-full p-[1vw]"
+              />
+            </label>
+            <label>
+              <p className="text-base text-white mb-[1vw] leading-3">
+                Email Address<sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type="email"
+                value={formData.email}
+                onChange={changeHandler}
+                placeholder="Email"
+                name="email"
+                className="rounded-xl text-white w-full p-[1vw]"
+              />
+            </label>
+            <label className="relative">
+              <p className="text-base text-white mb-[1vw] leading-3">
+                Create Password<sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type={showPassword ? "text" : "password"}
+                value={formData.password}
+                onChange={changeHandler}
+                placeholder="********"
+                name="password"
+                className="rounded-xl text-white w-full p-[1vw]"
+              />
+              <span
+                className="absolute right-4 text-white top-11 scale-125"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? <GoEye /> : <GoEyeClosed />}
+              </span>
+            </label>
+            <label className="relative">
+              <p className="text-base text-white mb-[1vw] leading-3">
+                Confirm Password<sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                type={showConfirmPassword ? "text" : "password"}
+                value={formData.confirmPassword}
+                onChange={changeHandler}
+                placeholder="********"
+                name="confirmPassword"
+                className="rounded-xl text-white w-full p-[1vw]"
+              />
+              <span
+                className="absolute right-4 text-white top-11 scale-125"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+              >
+                {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
+              </span>
+            </label>
             <input
-              required
-              type="text"
-              value={formData.name}
-              onChange={changeHandler}
-              placeholder="Name"
-              name="name"
+              type="submit"
+              value="Create Account"
+              className="btn w-[40%] bg-orange-500 hover:bg-orange-400 text-black font-semibold"
             />
-          </label>
-          <label>
-            <p>
-              Email Address<sup>*</sup>
-            </p>
-            <input
-              required
-              type="email"
-              value={formData.email}
-              onChange={changeHandler}
-              placeholder="Email"
-              name="email"
-            />
-          </label>
-          <label>
-            <p>
-              Create Password<sup>*</sup>
-            </p>
-            <input
-              required
-              type={showPassword ? "text" : "password"}
-              value={formData.password}
-              onChange={changeHandler}
-              placeholder="********"
-              name="password"
-            />
-            <span onClick={() => setShowPassword((prev) => !prev)}>
-              {showPassword ? <GoEyeClosed /> : <GoEye />}
-            </span>
-          </label>
-          <label>
-            <p>
-              Confirm Password<sup>*</sup>
-            </p>
-            <input
-              required
-              type={showConfirmPassword ? "text" : "password"}
-              value={formData.confirmPassword}
-              onChange={changeHandler}
-              placeholder="********"
-              name="confirmPassword"
-            />
-            <span onClick={() => setShowConfirmPassword((prev) => !prev)}>
-              {showConfirmPassword ? <GoEyeClosed /> : <GoEye />}
-            </span>
-          </label>
-          <input type="submit" value="Create Account" className="btn" />
-        </form>
+          </form>
+          <div className="flex justify-center items-center">
+            <img className="w-[32vw]" src={photo} alt="" />
+          </div>
+        </div>
       </div>
     </div>
   );
