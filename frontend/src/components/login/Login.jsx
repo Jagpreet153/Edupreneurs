@@ -28,7 +28,7 @@ function Login() {
 
   return (
     <div className="overflow-hidden flex justify-center">
-      <div className="max-w-[80vw] flex items-center flex-col">
+      <div className="max-w-[80vw] flex items-center flex-col mb-[4vw]">
         <h1 className="mt-[8vw] mb-[2vw] text-white font-bold text-4xl text-center">
           Unlock Your Learning Potential with [Platform Name]
         </h1>
@@ -44,13 +44,13 @@ function Login() {
             <Link to={"/signup"}> Create an Account</Link>
           </span>
         </p>
-        <div className="flex w-full gap-x-[16vw]">
+        <div className="flex flex-col sm:flex-row w-full gap-x-[16vw]">
           <form
             onSubmit={submitHandler}
-            className="w-[32vw] flex flex-col gap-y-4 mt-6"
+            className="w-full sm:w-[32vw] flex flex-col gap-y-4 mt-6"
           >
             <label>
-              <p className="text-base text-white mb-[1vw] leading-3">
+              <p className="text-base text-white mb-[1vw] leading-5">
                 Email Address<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -64,7 +64,7 @@ function Login() {
               />
             </label>
             <label className="relative">
-              <p className="text-base text-white mb-[1vw] leading-3">
+              <p className="text-base text-white mb-[1vw] leading-5">
                 Password<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -77,7 +77,7 @@ function Login() {
                 className="rounded-xl text-white w-full p-[1vw]"
               />
               <span
-                className="absolute right-4 text-white top-11 scale-125"
+                className="absolute right-4 text-white top-11 scale-125 opacity-50"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
@@ -91,11 +91,11 @@ function Login() {
             <input
               type="submit"
               value="Sign In"
-              className="btn w-[40%] bg-orange-500 hover:bg-orange-400 text-black font-semibold"
+              className="btn mt-[1vw] mb-[4vw] bg-orange-500 hover:bg-orange-400 text-black font-semibold"
             />
           </form>
           <div className="flex justify-center items-center">
-            <img className="w-[32vw]" src={photo} alt="" />
+            <img className="w-[60vw] sm:w-[32vw]" src={photo} alt="" />
           </div>
         </div>
       </div>
