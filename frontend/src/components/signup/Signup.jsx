@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import photo from "../../assets/login_image.png";
 
-function Signup() {
+// eslint-disable-next-line react/prop-types
+function Signup({setIsLoggedIn}) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,11 +27,12 @@ function Signup() {
 
   function submitHandler(event) {
     event.preventDefault();
+    setIsLoggedIn(true);
     if (formData.password != formData.confirmPassword) {
       toast.error("Passwords do not match.");
     } else {
       toast.success("Account created successfully");
-      navigate("/login");
+      navigate("/dashboard");
     }
   }
 
