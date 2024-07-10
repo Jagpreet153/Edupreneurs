@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import photo from "../../assets/login_image.png";
 
-function Login() {
+// eslint-disable-next-line react/prop-types
+function Login({setIsLoggedIn}) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,6 +23,7 @@ function Login() {
   }
   function submitHandler(event) {
     event.preventDefault();
+    setIsLoggedIn(true);
     toast.success("Logged in successfully");
     navigate("/dashboard");
   }
