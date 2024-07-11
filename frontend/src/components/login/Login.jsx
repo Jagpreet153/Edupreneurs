@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import photo from "../../assets/login_image.png";
+import home_svg from "../../assets/home_svg.svg";
 import axios from 'axios'
 // eslint-disable-next-line react/prop-types
 function Login({setIsLoggedIn}) {
@@ -13,10 +13,10 @@ function Login({setIsLoggedIn}) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  function submitHandler(event) {
+   function submitHandler(event) {
      event.preventDefault();
     try {
-      axios.post("http://localhost:3000/api/v2/checkUser",{email,password}) 
+       axios.post("http://localhost:3000/api/v2/checkUser",{email,password}) 
      .then(()=>{
       toast.success("Logged in successfully");
        navigate('/dashboard')
@@ -33,16 +33,16 @@ function Login({setIsLoggedIn}) {
   return (
     <div className="overflow-hidden flex justify-center">
       <div className="max-w-[80vw] flex items-center flex-col mb-[4vw] ">
-        <h1 className="mt-[8vw] mb-[2vw] text-white font-bold text-4xl text-center">
+        <h1 className="mt-[8vw] mb-[2vw] text-black font-bold text-4xl text-center">
           Unlock Your Learning Potential with [Platform Name]
         </h1>
-        <p className="mb-[2vw] text-white text-center">
+        <p className="mb-[2vw] text-black text-center">
           Welcome Back to [Platform Name], your gateway to seamless
           communication and collaboration. Log in to stay connected with
           faculty, track your academic progress, and access all the resources
           you need for success.
         </p>
-        <p className="mb-[2vw] text-white text-center">
+        <p className="mb-[2vw] text-black text-center">
           New to our platform??
           <span className="text-blue-400 hover:text-blue-500">
             <Link to={"/signup"}> Create an Account</Link>
@@ -54,7 +54,7 @@ function Login({setIsLoggedIn}) {
             className="w-full sm:w-[32vw] flex flex-col gap-y-4 mt-6"
           >
             <label>
-              <p className="text-base text-white mb-[1vw] leading-5">
+              <p className="text-base text-black mb-[1vw] leading-5">
                 Email Address<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -64,11 +64,11 @@ function Login({setIsLoggedIn}) {
                 onChange={(e)=>setemail(e.target.value)}
                 placeholder="Email"
                 name="email"
-                className="rounded-xl text-white w-full p-[1vw]"
+                className="input input-bordered input-warning w-full"
               />
             </label>
             <label className="relative">
-              <p className="text-base text-white mb-[1vw] leading-5">
+              <p className="text-base text-black mb-[1vw] leading-5">
                 Password<sup className="text-pink-200">*</sup>
               </p>
               <input
@@ -78,10 +78,10 @@ function Login({setIsLoggedIn}) {
                 onChange={(e)=>setPassword(e.target.value)}
                 placeholder="********"
                 name="password"
-                className="rounded-xl text-white w-full p-[1vw]"
+                className="input input-bordered input-warning w-full"
               />
               <span
-                className="absolute right-4 text-white top-11 scale-125 opacity-50"
+                className="absolute right-4 text-black top-11 scale-125 opacity-50"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
@@ -92,14 +92,10 @@ function Login({setIsLoggedIn}) {
                 </p>
               </Link>
             </label>
-            <input
-              type="submit"
-              value="Sign In"
-              className="btn mt-[1vw] mb-[4vw] bg-orange-500 hover:bg-orange-400 text-black font-semibold"
-            />
+            <button className="btn btn-warning text-white">Log In</button>
           </form>
           <div className="flex justify-center items-center">
-            <img className="w-[60vw]  sm:w-[32vw]" src={photo} alt="" />
+            <img className="w-[60vw]  sm:w-[32vw]" src={home_svg} alt="" />
           </div>
         </div>
       </div>
