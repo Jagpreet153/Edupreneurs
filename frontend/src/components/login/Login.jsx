@@ -10,13 +10,17 @@ function Login({setIsLoggedIn}) {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [reemail, setReemail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [newpassword, setNewpassword] = useState(""); 
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
    function submitHandler(event) {
      event.preventDefault();
     try {
-       axios.post("http://localhost:3000/api/v2/checkUser",{email,password}) 
+       axios.post("http://localhost:3000/api/v2/checkUser",{email}) 
      .then(()=>{
       toast.success("Logged in successfully");
        navigate('/dashboard')
@@ -31,7 +35,7 @@ function Login({setIsLoggedIn}) {
   }
 
   return (
-    <div className="overflow-hidden flex justify-center">
+    <div className="overflow-hidden flex justify-center ">
       <div className="max-w-[80vw] flex items-center flex-col mb-[4vw] ">
         <h1 className="mt-[8vw] mb-[2vw] text-black font-bold text-4xl text-center">
           Unlock Your Learning Potential with [Platform Name]
@@ -86,11 +90,55 @@ function Login({setIsLoggedIn}) {
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
               </span>
-              <Link to="#">
-                <p className="text-blue-400 hover:text-blue-500 text-xs mt-1 max-w-max ml-auto">
-                  Forgot Password
-                </p>
-              </Link>
+              <p className="mt-2 hover:text-blue-500 w-[8rem] text-grey-950 cursor-pointer" onClick={()=>document.getElementById('my_modal_5').showModal()}>Forgot Password</p>
+                  <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box">
+                      <h3 className="font-bold text-lg">Generate OTP to get new password</h3>
+                      <p className="py-4">Enter E-mail</p>
+                    <input
+                      className="input input-bordered input-warning w-full"
+                      placeholder="Enter Email"
+                      type="email"
+                      value={reemail}
+                      onChange={(e) => setReemail(e.target.value)}
+                    />
+                      <div className="modal-action">
+                        <form method="dialog">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button className="btn btn-warning text-white" onClick={()=>document.getElementById('my_modal_2').showModal()} >Get OTP</button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
+                  <dialog id="my_modal_2" className="modal">
+                  <div className="modal-box">
+                  <h3 className="font-bold text-lg">Change Password</h3>
+                  <p className="py-4">Enter OTP</p>
+                  <input
+                className="input input-bordered input-warning w-full"
+                placeholder="OTP"
+                type="password"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+              <p className="py-4">Enter New Password</p>
+                  <input
+                className="input input-bordered input-warning w-full"
+                placeholder="New Password"
+                type="password"
+                value={newpassword}
+                onChange={(e) => setNewpassword(e.target.value)}
+              />
+                    
+
+                    <div className="modal-action">
+                      <form method="dialog">
+
+                        <button className=" btn btn-warning text-white">Change</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
             </label>
             <button className="btn btn-warning text-white">Log In</button>
           </form>
