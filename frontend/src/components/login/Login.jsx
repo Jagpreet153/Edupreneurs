@@ -20,7 +20,7 @@ function Login({setIsLoggedIn}) {
    function submitHandler(event) {
      event.preventDefault();
     try {
-       axios.post("http://localhost:3000/api/v2/checkUser",{email}) 
+       axios.post("http://localhost:3000/api/v2/checkUser",{email , password}) 
      .then(()=>{
       toast.success("Logged in successfully");
       setIsLoggedIn(true);
