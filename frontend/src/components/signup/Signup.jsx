@@ -121,7 +121,7 @@ function Signup({setIsLoggedIn}) {
                 className="input input-bordered input-warning w-full"
               />
               <span
-                className="absolute right-4  top-11 scale-125 opacity-50"
+                className="absolute right-4  top-12 scale-125 opacity-50"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
@@ -141,7 +141,7 @@ function Signup({setIsLoggedIn}) {
                 className="input input-bordered input-warning w-full"
               />
               <span
-                className="absolute right-4  top-11 scale-125 opacity-50"
+                className="absolute right-4  top-12 scale-125 opacity-50"
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
               >
                 {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
