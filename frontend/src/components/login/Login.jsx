@@ -23,6 +23,7 @@ function Login({setIsLoggedIn}) {
        axios.post("http://localhost:3000/api/v2/checkUser",{email}) 
      .then(()=>{
       toast.success("Logged in successfully");
+      setIsLoggedIn(true);
        navigate('/dashboard')
      })
      .catch(()=>{
@@ -85,12 +86,12 @@ function Login({setIsLoggedIn}) {
                 className="input input-bordered input-warning w-full"
               />
               <span
-                className="absolute right-4 text-black top-11 scale-125 opacity-50"
+                className="absolute right-4 text-black top-12 scale-125 opacity-50"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
               </span>
-              <p className="mt-2 hover:text-blue-500 w-[8rem] text-grey-950 cursor-pointer" onClick={()=>document.getElementById('my_modal_5').showModal()}>Forgot Password</p>
+              <p className="mt-1 hover:text-blue-500 w-[8rem] text-blue-400 cursor-pointer ml-auto" onClick={()=>document.getElementById('my_modal_5').showModal()}>Forgot Password</p>
                   <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
                       <h3 className="font-bold text-lg">Generate OTP to get new password</h3>
