@@ -91,27 +91,32 @@ function Login({setIsLoggedIn}) {
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
               </span>
-              <p className="mt-1 hover:text-blue-500 w-[8rem] text-blue-400 cursor-pointer ml-auto" onClick={()=>document.getElementById('my_modal_5').showModal()}>Forgot Password</p>
-                  <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                    <div className="modal-box">
-                      <h3 className="font-bold text-lg">Generate OTP to get new password</h3>
-                      <p className="py-4">Enter E-mail</p>
-                    <input
-                      className="input input-bordered input-warning w-full"
-                      placeholder="Enter Email"
-                      type="email"
-                      value={reemail}
-                      onChange={(e) => setReemail(e.target.value)}
-                    />
-                      <div className="modal-action">
+              {/* You can open the modal using document.getElementById('ID').showModal() method */}
+              <p className="mt-1 hover:text-blue-500 w-[8rem] text-blue-400 cursor-pointer ml-auto" onClick={()=>document.getElementById('my_modal_3').showModal()}>Forgot Password</p>
+                    <dialog id="my_modal_3" className="modal">
+                      <div className="modal-box">
                         <form method="dialog">
                           {/* if there is a button in form, it will close the modal */}
-                          <button className="btn btn-warning text-white" onClick={()=>document.getElementById('my_modal_2').showModal()} >Get OTP</button>
+                          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
+                        <h3 className="font-bold text-lg">Generate OTP to get new password</h3>
+                        <p className="py-4">Enter E-mail</p>
+                        <input
+                          className="input input-bordered input-warning w-full"
+                          placeholder="Enter Email"
+                          type="email"
+                          value={reemail}
+                          onChange={(e) => setReemail(e.target.value)}
+                        />
+                          <div className="modal-action">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button className="btn btn-warning text-white" onClick={()=>document.getElementById('my_modal_2').showModal()} >Get OTP</button>
+                            </form>
+                          </div>
                       </div>
-                    </div>
-                  </dialog>
-                  <dialog id="my_modal_2" className="modal">
+                    </dialog>
+                    <dialog id="my_modal_2" className="modal">
                   <div className="modal-box">
                   <h3 className="font-bold text-lg">Change Password</h3>
                   <p className="py-4">Enter OTP</p>
@@ -134,7 +139,7 @@ function Login({setIsLoggedIn}) {
 
                     <div className="modal-action">
                       <form method="dialog">
-
+                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         <button className=" btn btn-warning text-white">Change</button>
                       </form>
                     </div>
