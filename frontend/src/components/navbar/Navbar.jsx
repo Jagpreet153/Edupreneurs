@@ -9,7 +9,7 @@ function Navbar(props){
     // eslint-disable-next-line react/prop-types
     let setIsLoggedIn = props.setIsLoggedIn;
     return(
-        <div className="flex justify-evenly items-center">
+        <div className="flex justify-evenly items-center bg-warning text-warning-content">
             <Link to="/">
                 <img src={logo} alt="" width={240} loading="lazy"/>
             </Link>
