@@ -116,7 +116,7 @@ function Login({setIsLoggedIn}) {
                           </div>
                       </div>
                     </dialog>
-                    <dialog id="my_modal_2" className="modal">
+                      <dialog id="my_modal_2" className="modal">
                   <div className="modal-box">
                   <h3 className="font-bold text-lg">Change Password</h3>
                   <p className="py-4">Enter OTP</p>
@@ -139,7 +139,7 @@ function Login({setIsLoggedIn}) {
 
                     <div className="modal-action">
                       <form method="dialog">
-                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+
                         <button className=" btn btn-warning text-white">Change</button>
                       </form>
                     </div>

@@ -25,62 +25,9 @@ function Signup({setIsLoggedIn}) {
       toast.error("Password does not match");
       return;
     }
-  
-  //   try {
-  //     await axios.post("http://localhost:3000/api/v2/duplicateUser", { email});
-
-  //     toast.error("Account already exists");
-  //     return; 
-  //   } catch (err) {
-
-  //     if (err.response && err.response.status === 404) {
-
-  //       try {
-  //         const details = {
-  //           name: name,
-  //           email: email,
-  //           password: password,
-  //         };
-  //         await axios.post("http://localhost:3000/api/v2/createUser", details);
-  //         console.log("Successfully SignUp.");
-  //         toast.success("Account created successfully");
-  //         setIsLoggedIn(true);
-  //         navigate('/login');
-  //       } catch (createErr) {
-  //         toast.error("Error occurred while creating account");
-  //         console.error(createErr);
-  //       }
-  //     } else {
-
-  //       toast.error("Account already exists");
-  //       console.error(err);
-  //     }
-  //   }
-  // }
 
     try{
        const response= await axios .post('http://localhost:3000/api/v2/duplicateUser',{email})
-        // .then(()=>{
-        //   toast.error("Account already exists");
-        // })
-        // .catch(()=>{
-        //   if(response.status!==404){
-        //   const details = {
-        //     name: name,
-        //     email: email,
-        //     password: password,
-        //   };
-        //   axios.post("http://localhost:3000/api/v2/createUser", details);
-        //   toast.success("Account created successfully");
-        //   setIsLoggedIn(true);
-        //   navigate('/login');
-        // }
-
-        // else 
-        // {
-        //   toast.error("Account already exists");
-        // }
-        // })
         if(response.data.exists===true){
           toast.error("Account already exists");
         }
