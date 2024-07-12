@@ -8,4 +8,7 @@ router.post("/createUser" , createUser);
 const {checkUser} = require("../controller/checkUser")
 router.post("/checkUser" , checkUser);
 
+const {duplicateUser} = require("../controller/duplicateUser")
+router.post("/duplicateUser" , duplicateUser);
+
 module.exports=router;
