@@ -43,15 +43,18 @@ function Login({setIsLoggedIn}) {
       toast.error("Please enter your email address");
       return;
     }
-
+    toast.loading("Sending OTP...")
     try {
+      
       const response = await axios.post("http://localhost:3000/api/v2/getotp", { email: reemail });
       if (response.data.message === 'OTP sent successfully') {
         setSentotp(true);
+        toast.dismiss();
         toast.success("OTP sent to your email");
         document.getElementById('my_modal_2').showModal();
         // document.getElementById('my_modal_2').showModal().close();
       } else {
+        toast.dismiss();
         toast.error("Failed to send OTP");
       }
     } catch (error) {
