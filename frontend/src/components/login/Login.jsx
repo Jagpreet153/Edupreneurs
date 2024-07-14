@@ -11,13 +11,14 @@ function Login({setIsLoggedIn}) {
   const [password, setPassword] = useState('');
 
   const [reemail, setReemail] = useState("");
-  const [otp, setOtp] = useState("");
+  const [sentotp, setSentotp] = useState(false);
+  const [otp, setOtp] = useState('');
   const [newpassword, setNewpassword] = useState(""); 
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-   function submitHandler(event) {
+  function submitHandler(event) {
      event.preventDefault();
     try {
        axios.post("http://localhost:3000/api/v2/checkUser",{email , password}) 
@@ -34,6 +35,59 @@ function Login({setIsLoggedIn}) {
      console.log("error occured");
  }
   }
+
+
+
+  const handleGetOTP = async () => {
+    if (!reemail) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/v2/getotp", { email: reemail });
+      if (response.data.message === 'OTP sent successfully') {
+        setSentotp(true);
+        toast.success("OTP sent to your email");
+        document.getElementById('my_modal_2').showModal();
+        // document.getElementById('my_modal_2').showModal().close();
+      } else {
+        toast.error("Failed to send OTP");
+      }
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      toast.error("Failed to send OTP");
+    }
+  };
+
+  const handleChangePassword = async () => {
+    if (!otp || !newpassword) {
+      toast.error("Please enter OTP and new password");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/v2/changePassword", {
+        email: reemail,
+        otp: otp,
+        newPassword: newpassword
+      });
+      if (response.data.message === 'Password changed successfully') {
+        toast.success("Password changed successfully");
+        document.getElementById('my_modal_2').close();
+        document.getElementById('my_modal_3').close();
+      } else {
+        toast.error("Failed to change passworddd");
+      }
+    } catch (error) {
+      console.error("Error changing password:", error);
+      toast.error("Failed to change password");
+    }
+  };
+
+
+
+
 
   return (
     <div className="overflow-hidden flex justify-center ">
@@ -111,7 +165,7 @@ function Login({setIsLoggedIn}) {
                           <div className="modal-action">
                             <form method="dialog">
                               {/* if there is a button in form, it will close the modal */}
-                              <button className="btn btn-warning text-white" onClick={()=>document.getElementById('my_modal_2').showModal()} >Get OTP</button>
+                              <button className="btn btn-warning text-white" onClick={handleGetOTP} >Get OTP</button>
                             </form>
                           </div>
                       </div>
@@ -140,7 +194,7 @@ function Login({setIsLoggedIn}) {
                     <div className="modal-action">
                       <form method="dialog">
 
-                        <button className=" btn btn-warning text-white">Change</button>
+                        <button onClick={handleChangePassword} className=" btn btn-warning text-white">Change</button>
                       </form>
                     </div>
                   </div>
