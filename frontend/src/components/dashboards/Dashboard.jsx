@@ -2,7 +2,7 @@
 
 function Dashboard(){
     return(
-        <div className="text-white">This is Dashobard Page</div>
+        <div className="text-base-content">This is Dashobard Page</div>
     )
 } 
 

@@ -10,12 +10,28 @@ import ParentDashboard from "./components/dashboards/ParentDashboard";
 import StudentDashboard from "./components/dashboards/StudentDashboard";
 import TeacherDashboard from "./components/dashboards/TeacherDashboard";
 import Notfound from "./components/Notfound/Notfound";
-import { useState } from "react";
+import Preloader from "./components/preloader/preloader";
+import { useState, useEffect } from "react";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading delay
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Adjust the delay as needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div>
+      {loading ? (
+        <Preloader />
+      ) : (
+        <div>
        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -41,6 +57,8 @@ function App() {
 
         <Route path="/*" element={<Notfound />} />
       </Routes>
+      </div>
+      )}
     </div>
   );
 }
