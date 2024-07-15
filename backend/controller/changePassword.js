@@ -20,17 +20,17 @@ try {
   // Check if OTP exists and is not expired
 
 
-// if (!user.otp || !user.otpExpiration) {
-//   return res.status(400).json({ message: 'No OTP request found' });
-// }
+if (!user.otp || !user.otpExpiration) {
+  return res.status(400).json({ message: 'No OTP request found' });
+}
 
-// if (user.otp !== otp) {
-//   return res.status(400).json({ message: 'Invalid OTP' });
-// }
+if (user.otp !== otp) {
+  return res.status(400).json({ message: 'Invalid OTP' });
+}
 
-// if (user.otpExpiration < new Date()) {
-//   return res.status(400).json({ message: 'OTP has expired' });
-// }
+if (user.otpExpiration < new Date()) {
+  return res.status(400).json({ message: 'OTP has expired' });
+}
 
    // Hash the new password
   const hashedPassword = await bcrypt.hash(newPassword, 10);

@@ -18,7 +18,5 @@ router.post("/getotp" , getotp);
 const {changePassword} = require("../controller/changePassword")
 router.post("/changePassword" , changePassword);
 
-// const {verifyOtp} = require("../controller/verifyOtp")
-// router.post("/verifyOtp" , verifyOtp);
 
 module.exports=router;

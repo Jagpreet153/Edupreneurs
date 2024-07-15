@@ -54,6 +54,7 @@ function Login({setIsLoggedIn}) {
         document.getElementById('my_modal_2').showModal();
         // document.getElementById('my_modal_2').showModal().close();
       } else {
+        setSentotp(false);
         toast.dismiss();
         toast.error("Failed to send OTP");
       }

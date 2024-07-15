@@ -3,10 +3,14 @@ const nodemailer = require('nodemailer');
 
 
 exports.getotp=async(req,res)=>{ 
+  const User = require('../model/user') 
 // Function to generate a random 6-digit OTP
 function generateOTP() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
+
+
+
 
 // Configure nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -30,10 +34,23 @@ const transporter = nodemailer.createTransport({
   };
 
   try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Set OTP and expiration
+    user.otp = otp;
+    user.otpExpiration = new Date(Date.now() + 5 * 60 * 1000); 
+    await user.save();
+    // console.log(user.otp);
+    // Send email
     await transporter.sendMail(mailOptions);
-    // Here you might want to save the OTP in your database associated with the user's email
+
     res.status(200).json({ message: 'OTP sent successfully' });
-  } catch (error) {
+  }  catch (error) {
     console.error('Error sending email:', error);
     res.status(500).json({ message: 'Failed to send OTP' });
   }
