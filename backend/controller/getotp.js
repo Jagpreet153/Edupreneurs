@@ -14,8 +14,8 @@ const transporter = nodemailer.createTransport({
   host: "localhost",
   port: 25,
   auth: {
-    user: "jskhurana153@gmail.com",
-    pass : "jgqm ojrf ynpn zmuq"
+    user: process.env.SENDER_EMAIL,
+    pass : process.env.SENDER_PASSWORD
   },
 });
   const { email } = req.body;
@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
   const mailOptions = {
 
-    from: "jskhurana153@gmail.com",  // My gmail address
+    from: "jskhurana153@gamil.com",
     to: email, 
     subject: 'Your OTP for verification',
     text: `Your OTP is: ${otp}`
