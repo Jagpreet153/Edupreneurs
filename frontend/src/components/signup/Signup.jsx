@@ -40,7 +40,7 @@ function Signup({setIsLoggedIn}) {
           axios.post("http://localhost:3000/api/v2/createUser", details);
           toast.success("Account created successfully");
           setIsLoggedIn(true);
-          navigate('/login');
+          navigate('/dashboard');
         }
       
     }
