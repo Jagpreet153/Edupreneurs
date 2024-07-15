@@ -6,7 +6,7 @@
 //     )
 // }
 
-import React from "react";
+// import React from "react";
 import { Link } from "react-router-dom";
 import { Player } from "@lottiefiles/react-lottie-player";
 
@@ -15,10 +15,9 @@ function Notfound() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <Player
         src="https://lottie.host/fbec6d06-6a3a-42a7-9bc0-ad305dc43023/i12swbcRNb.json"
-        className="player"
+        className="player max-w-[300px] w-[80vw]"
         loop
         autoplay
-        style={{ height: '400px', width: '400px' }}
       />
 
       <div className="text-center">

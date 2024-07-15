@@ -1,18 +1,16 @@
 // import React from 'react';
-import './preloader.css';
+import { Player } from "@lottiefiles/react-lottie-player";
+import preloaderAnim from "./PreloaderAnimation.json";
 
 const Preloader = () => {
   return (
-    <div className="bookshelf_wrapper bg-white m-0 w-screen h-screen flex flex-col justify-center items-center">
-      <ul className="books_list">
-        <li className="book_item first"></li>
-        <li className="book_item second"></li>
-        <li className="book_item third"></li>
-        <li className="book_item fourth"></li>
-        <li className="book_item fifth"></li>
-        <li className="book_item sixth"></li>
-      </ul>
-      <div className="shelf"></div>
+    <div className="flex flex-col items-center justify-center h-screen w-screen bg-base-100">
+      <Player
+        src={preloaderAnim}
+        className="player max-w-[300px] w-[80vw]"
+        loop
+        autoplay
+      />
     </div>
   );
 }
