@@ -1,9 +1,10 @@
-// import React from 'react'
-
+import Chatbot from './chatbot/chatbot';
 function Dashboard(){
-    return(
-        <div className="text-base-content">This is Dashobard Page</div>
-    )
+  return (
+  <Chatbot/>
+
+
+  )
 } 
 
 export default Dashboard;
