@@ -1,27 +1,38 @@
-// const express = require('express')
-// const router = express.Router()
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+exports.auth = (req, res, next) => {
+    try {
+        console.log('Cookies:', req.cookies);
+        console.log('Body:', req.body);
+        console.log('Authorization Header:', req.header("Authorization"));
 
-// const {signup}= require('../controller/signup')
-// const {login}= require('../controller/login')
+        const token = req.cookies?.token || req.body?.token || req.header("Authorization")?.replace("Bearer ", "");
+        
+        console.log('Extracted token:', token);
 
-//  router.post('/login',login)
-// router.post('/signup',signup)
+        if (!token) {
+            return res.status(401).json({
+                success: false,
+                message: "Token is missing"
+            });
+        }
 
-
-// const {Auth,das}= require('../middleware/Auth')
-// router.get("/student",Auth, isStudent,(req,res)=>{
-//     res.json({
-//         success:true,
-//         message:"Welcome to the eprotected page Student"
-//     })
-// })
-
-// router.get("/dashboard", Auth, isAdmin,(req,res)=>{
-//     res.json({
-//         success:true,
-//         message:"Welcome to the protected page  Admin "
-//     })
-// })
-// module.exports=router
-
-
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = decoded;
+            next();
+        } catch (err) {
+            console.error('Token verification error:', err);
+            return res.status(401).json({
+                success: false,
+                message: "Invalid token"
+            });
+        }
+    } catch (err) {
+        console.error('General error:', err);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+};

@@ -18,5 +18,13 @@ router.post("/getotp" , getotp);
 const {changePassword} = require("../controller/changePassword")
 router.post("/changePassword" , changePassword);
 
+//const { auth } = require('../middleware/Auth');
+
+const {logout} = require("../controller/logout")
+router.get("/logout",logout);
+
+
+
+
 
 module.exports=router;

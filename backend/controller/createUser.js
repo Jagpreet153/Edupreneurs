@@ -1,35 +1,49 @@
-const user = require("../model/user")   // Importing todo 
-const bcrypt =require('bcrypt')
-const jwt = require('jsonwebtoken') 
-exports.createUser=async(req,res)=>{   // Async function is applied as it will wait for data
+const user = require("../model/user")   
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
-const JWT_SECRET=process.env.JWT_SECRET
-  try{
+exports.createUser = async (req, res) => {
+  const JWT_SECRET = process.env.JWT_SECRET
 
-      const {name,email,password} = req.body;
+  try {
+    const { name, email, password } = req.body;
 
-      let hashedPass;
-      hashedPass=await bcrypt.hash(password,10)
-      const response= await user.create({
-          name,email,password:hashedPass
-      })
+    // Hash the password
+    const hashedPass = await bcrypt.hash(password, 10)
 
-      res.status(200).json({
-          success:true,
-          data: response,
-          message: "Entry created successfully"
-  })
+    // Create the user
+    const newUser = await user.create({
+      name,
+      email,
+      password: hashedPass
+    })
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: newUser._id },
+      JWT_SECRET,
+      { expiresIn: '1h' } // Token expires in 1 hour
+    )
+
+    res.status(201).json({
+      success: true,
+      data: {
+        user: {
+          id: newUser._id,
+          name: newUser.name,
+          email: newUser.email
+        },
+        token
+      },
+      message: "User created successfully"
+    })
   }
-  
-  catch(err){
-      console.error();
-      console.log(err);
-      res.status(500)
-      .json({
-              success : false,
-              data: "internal server error",
-              message:err.message,
-          }
-      )
+  catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      data: "Internal server error",
+      message: err.message,
+    })
   }
 }
