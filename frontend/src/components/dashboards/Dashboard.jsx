@@ -1,8 +1,18 @@
-
 import { useState } from "react";
 import Chatbot from "./chatbot/chatbot";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { MdOutlineSpaceDashboard, MdOutlineSupportAgent } from "react-icons/md";
-import { IoHomeOutline, IoCalendarNumberOutline, IoInformationCircleOutline } from "react-icons/io5";
+import {
+  IoHomeOutline,
+  IoCalendarNumberOutline,
+  IoInformationCircleOutline,
+  IoAddCircle,
+  IoArrowDown,
+  IoLogOutSharp,
+  IoNotifications,
+} from "react-icons/io5";
+import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 
 function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
@@ -11,137 +21,165 @@ function Dashboard() {
     <div>
       <Chatbot />
       <div>
-        <div className="navbar bg-base-300">
-          <label className="btn btn-circle swap swap-rotate">
-            {/* this hidden checkbox controls the state */}
-            <input type="checkbox" checked={!isMenuOpen} onChange={() => setIsMenuOpen((prev) => !prev)} />
-
-            {/* hamburger icon */}
-            <svg
-              className="swap-on fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 512 512"
-            >
-              <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
-            </svg>
-
-            {/* close icon */}
-            <svg
-              className="swap-off fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 512 512"
-            >
-              <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
-            </svg>
-          </label>
-          <div className="flex-1">
-            <a className="btn btn-ghost text-xl">EduPreneurs </a>
-          </div>
-          <div className="flex-none gap-2">
-            <div className="form-control">
+        <div className="navbar h-20 bg-base-200 flex justify-between">
+          <div className="gap-6">
+            <label className="btn btn-circle swap swap-rotate">
+              {/* this hidden checkbox controls the state */}
               <input
-                type="text"
-                placeholder="Search"
-                className="input input-bordered w-24 md:w-auto"
+                type="checkbox"
+                checked={!isMenuOpen}
+                onChange={() => setIsMenuOpen((prev) => !prev)}
               />
-            </div>
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  />
-                </div>
+              <GiHamburgerMenu className="swap-on h-8 w-8" />
+              <GiCancel className="swap-off h-8 w-8" />
+            </label>
+            <div className="flex gap-6">
+              <div className="flex">
+                <a className="btn btn-ghost text-xl">EduPreneurs </a>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              <div className="form-control">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="input input-bordered w-[50vw]"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2">
+          <div className="indicator">
+  <span className="indicator-item badge badge-error rounded-full scale-50 mr-2 mt-1"></span>
+  <IoNotifications className="h-8 w-8 opacity-40"/>
+</div>
+            <details className="dropdown dropdown-end">
+              <summary
+                // tabIndex={0}
+                // role="button"
+                className="btn m-1 btn-ghost"
               >
-                <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
-                </li>
-                <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a>Logout</a>
+                <div className="flex items-center gap-1">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      className="rounded-full"
+                    />
+                  </div>
+                  <span>Profile</span>
+                  <IoArrowDown />
+                </div>
+              </summary>
+              <ul
+                // tabIndex={0}
+                className="menu menu-sm min-h-[calc(100vh-80px)] pb-8 flex flex-col items-center justify-between dropdown-content bg-base-200 rounded-box z-[1] mt-3 w-72 p-2 shadow"
+              >
+                <div className="flex flex-col gap-4 items-center">
+                  <li>
+                    <img
+                      alt="Profile image"
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      className="rounded-full h-64 w-64"
+                    />
+                  </li>
+                  <li className="font-bold text-xl">FirstName LastName</li>
+                  <li className="font-bold text-base">Email ID</li>
+                  <li className="font-bold text-base">
+                    <a>Edit Profile</a>
+                  </li>
+                </div>
+                <li className="font-bold text-2xl">
+                  <Link to={"/"}>
+                    <button
+                      className="flex gap-2 items-center"
+                      onClick={() => {
+                        // setIsLoggedIn( false);
+                        toast.success("Logged out Successfully");
+                      }}
+                    >
+                      LOGOUT <IoLogOutSharp className="h-8 w-8" />
+                    </button>
+                  </Link>
                 </li>
               </ul>
-            </div>
+            </details>
           </div>
         </div>
-        <ul className={`menu menu-lg ${isMenuOpen === true ? 'w-72' : 'w-20'} h-screen p-0 bg-base-200 rounded-box`}
-        onClick={() => setIsMenuOpen((prev) => !prev)}>
+        <ul
+          className={`menu menu-lg ${
+            isMenuOpen === true ? "w-72" : "w-20"
+          } min-h-[calc(100vh-80px)] p-0 bg-base-200 rounded-box`}
+          // onClick={() => setIsMenuOpen((prev) => !prev)}
+        >
           <li>
-            <a className={`flex ${isMenuOpen === true ? '' : 'tooltip  tooltip-right'} p-4`} data-tip="Dashboard">
-              <MdOutlineSpaceDashboard className="h-8 w-8 font-bold"/>
-              {isMenuOpen? (
-                <div>
-                  Dashboard
-                </div>
-              ):(
-                <div></div>
-              )}
+            <button
+              className={`rounded-full p-2 my-4 ${
+                isMenuOpen === true ? "mx-4" : "mx-2"
+              } bg-primary flex justify-center items-center`}
+            >
+              <a
+                className={`flex ${
+                  isMenuOpen === true ? "" : "tooltip tooltip-right"
+                }`}
+                data-tip="Add New Class"
+              >
+                <IoAddCircle className="h-8 w-8 font-bold" />
+                {isMenuOpen ? <div>Add New Class</div> : <div></div>}
+              </a>
+            </button>
+          </li>
+          <li>
+            <a
+              className={`flex ${
+                isMenuOpen === true ? "" : "tooltip  tooltip-right"
+              } p-4`}
+              data-tip="Dashboard"
+            >
+              <MdOutlineSpaceDashboard className="h-8 w-8 font-bold" />
+              {isMenuOpen ? <div>Dashboard</div> : <div></div>}
             </a>
           </li>
           <li>
-            <a className={`flex ${isMenuOpen === true ? '' : 'tooltip  tooltip-right'} p-4`} data-tip="Home">
-              <IoHomeOutline className="h-8 w-8 font-extrabold"/>
-              {isMenuOpen? (
-                <div>
-                  Home
-                </div>
-              ):(
-                <div></div>
-              )}
+            <a
+              className={`flex ${
+                isMenuOpen === true ? "" : "tooltip  tooltip-right"
+              } p-4`}
+              data-tip="Home"
+            >
+              <IoHomeOutline className="h-8 w-8 font-extrabold" />
+              {isMenuOpen ? <div>Home</div> : <div></div>}
             </a>
           </li>
           <li>
-          <a className={`flex ${isMenuOpen === true ? '' : 'tooltip  tooltip-right'} p-4`} data-tip="Calendar">
-              <IoCalendarNumberOutline className="h-8 w-8 font-extrabold"/>
-              {isMenuOpen? (
-                <div>
-                  Calendar
-                </div>
-              ):(
-                <div></div>
-              )}
+            <a
+              className={`flex ${
+                isMenuOpen === true ? "" : "tooltip  tooltip-right"
+              } p-4`}
+              data-tip="Calendar"
+            >
+              <IoCalendarNumberOutline className="h-8 w-8 font-extrabold" />
+              {isMenuOpen ? <div>Calendar</div> : <div></div>}
             </a>
           </li>
           <li>
-            <a className={`flex ${isMenuOpen === true ? '' : 'tooltip  tooltip-right'} p-4`} data-tip="Contact Us">
-              <MdOutlineSupportAgent className="h-8 w-8 font-bold"/>
-              {isMenuOpen? (
-                <div>
-                  Contact Us
-                </div>
-              ):(
-                <div></div>
-              )}
+            <a
+              className={`flex ${
+                isMenuOpen === true ? "" : "tooltip  tooltip-right"
+              } p-4`}
+              data-tip="Contact Us"
+            >
+              <MdOutlineSupportAgent className="h-8 w-8 font-bold" />
+              {isMenuOpen ? <div>Contact Us</div> : <div></div>}
             </a>
           </li>
           <li>
-            <a className={`flex ${isMenuOpen === true ? '' : 'tooltip  tooltip-right'} p-4`} data-tip="About Us">
-              <IoInformationCircleOutline className="h-8 w-8 font-bold"/>
-              {isMenuOpen? (
-                <div>
-                  About Us
-                </div>
-              ):(
-                <div></div>
-              )}
+            <a
+              className={`flex ${
+                isMenuOpen === true ? "" : "tooltip  tooltip-right"
+              } p-4`}
+              data-tip="About Us"
+            >
+              <IoInformationCircleOutline className="h-8 w-8 font-bold" />
+              {isMenuOpen ? <div>About Us</div> : <div></div>}
             </a>
           </li>
         </ul>
