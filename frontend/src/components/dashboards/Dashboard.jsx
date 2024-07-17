@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Chatbot from "./chatbot/chatbot";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
+import axios from "axios";
 import { MdOutlineSpaceDashboard, MdOutlineSupportAgent } from "react-icons/md";
 import {
   IoHomeOutline,
@@ -16,7 +17,25 @@ import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 
 function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const navigate = useNavigate();
 
+  const logout = async () => {
+
+    try {
+        // Make a request to the server's logout endpoint
+        toast.success("Logged out successfully");
+        const response = await axios.post('http://localhost:3000/api/v2/logout')
+        .then(()=>{
+         
+          localStorage.removeItem('token');
+          console.log(response.data.message);
+          navigate('/')
+         })
+    }
+    catch (error) {
+      console.log('Error during logout:', error.response ? error.response.data : error.message);
+  }
+}
   return (
     <div>
       <Chatbot />
@@ -91,10 +110,7 @@ function Dashboard() {
                   <Link to={"/"}>
                     <button
                       className="flex gap-2 items-center"
-                      onClick={() => {
-                        // setIsLoggedIn( false);
-                        toast.success("Logged out Successfully");
-                      }}
+                      onClick={logout}
                     >
                       LOGOUT <IoLogOutSharp className="h-8 w-8" />
                     </button>
