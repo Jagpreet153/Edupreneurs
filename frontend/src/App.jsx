@@ -10,8 +10,10 @@ import ParentDashboard from "./components/dashboards/ParentDashboard";
 import StudentDashboard from "./components/dashboards/StudentDashboard";
 import TeacherDashboard from "./components/dashboards/TeacherDashboard";
 import Notfound from "./components/Notfound/Notfound";
+
 import Preloader from "./components/preloader/preloader";
 import { useState, useEffect } from "react";
+import ContactUs from "./components/conatctUs/ContactUs";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -54,7 +56,7 @@ function App() {
         <Route path="/parentDashboard" element={<ParentDashboard />} />
         <Route path="/studentDashboard" element={<StudentDashboard />} />
         <Route path="/teacherDashboard" element={<TeacherDashboard />} />
-
+        <Route path="/contactus" element={<ContactUs/>} />
         <Route path="/*" element={<Notfound />} />
       </Routes>
       </div>

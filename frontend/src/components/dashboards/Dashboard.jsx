@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chatbot from "./chatbot/chatbot";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -43,19 +43,28 @@ export const cards = [
   },
 ];
 
+
 function Dashboard() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [isAddNewClassOpen, setIsAddNewClassOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   // const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isLoggedIn,setIsLoggedIn]= useState(true);
   const navigate = useNavigate();
+
+
+
+
 
   const logout = async () => {
     try {
       // Make a request to the server's logout endpoint
       toast.success("Logged out successfully");
       const response = await axios
-        .post("http://localhost:3000/api/v2/logout")
+        .get("http://localhost:3000/api/v2/logout")
         .then(() => {
+          setIsLoggedIn(false);
           localStorage.removeItem("token");
           console.log(response.data.message);
           navigate("/");
@@ -132,21 +141,21 @@ function Dashboard() {
                       className="rounded-full h-60 w-60"
                     />
                   </li>
-                  <li className="font-bold text-xl">FirstName LastName</li>
-                  <li className="font-bold text-base">Email ID</li>
+                  <li className="font-bold text-xl">jdkhvfj</li>
+                  <li className="font-bold text-base">kvhjsjkd</li>
                   <li className="font-bold text-base">
                     <a>Edit Profile</a>
                   </li>
                 </div>
                 <li className="font-bold text-2xl">
-                  <Link to={"/"}>
+                  {/* <Link to={"/"}> */}
                     <button
                       className="flex gap-2 items-center"
                       onClick={logout}
                     >
                       LOGOUT <IoLogOutSharp className="h-8 w-8" />
                     </button>
-                  </Link>
+                  {/* </Link> */}
                 </li>
               </ul>
             </details>
@@ -229,7 +238,7 @@ function Dashboard() {
                 data-tip="Contact Us"
               >
                 <MdOutlineSupportAgent className="h-8 w-8 font-bold" />
-                {isMenuOpen ? <div>Contact Us</div> : <div></div>}
+                {isMenuOpen ? <div><Link to='/contactus'>Contact Us</Link></div> : <div></div>}
               </a>
             </li>
             <li>

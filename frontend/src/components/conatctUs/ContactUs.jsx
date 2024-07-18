@@ -24,7 +24,7 @@ const ContactUs = () => {
               <input
                 type="text"
                 id="name"
-                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+                className="input input-bordered input-warning w-full "
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -36,7 +36,7 @@ const ContactUs = () => {
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+                className="input input-bordered input-warning w-full "
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -48,7 +48,7 @@ const ContactUs = () => {
             </label>
             <textarea
               id="message"
-              className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+              className="input input-bordered input-warning w-full "
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
@@ -56,7 +56,7 @@ const ContactUs = () => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="btn btn-warning text-white"
             >
               Submit
             </button>
