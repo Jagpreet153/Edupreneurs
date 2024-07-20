@@ -1,5 +1,6 @@
 // import React from 'react'
-import { useState } from "react";
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../userContext'
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -7,7 +8,9 @@ import home_svg from "../../assets/home_svg.svg";
 import axios from 'axios'
 // eslint-disable-next-line react/prop-types
 function Login({setIsLoggedIn}) {
+  const { setUser } = useContext(UserContext);
   const [email, setemail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
   const [reemail, setReemail] = useState("");
@@ -18,23 +21,27 @@ function Login({setIsLoggedIn}) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  function submitHandler(event) {
+ async function submitHandler(event) {
      event.preventDefault();
     try {
-       axios.post("http://localhost:3000/api/v2/checkUser",{email , password}) 
-     .then(()=>{
-      toast.success("Logged in successfully");
-      setIsLoggedIn(true);
-       navigate('/dashboard')
-     })
-     .catch(()=>{
+     const res=await axios.post("http://localhost:3000/api/v2/checkUser", { email, password })
+     // Assuming the backend sends user data including name
+    
+    toast.success("Logged in successfully");
+    setIsLoggedIn(true);
+    navigate('/dashboard');
+     const { name } = res.data;
+    const user = {name:name , email : email};
+    setUser(user)
+    // console.log("Set user in context:", { name: user.name, email: user.email });
+    }
+    catch{
      toast.error("Kindly check Email / Password");
-    })
-     }
- catch(err){
-     console.log("error occured");
- }
-  }
+    }
+    
+}
+    
+
 
 
 
@@ -94,6 +101,7 @@ function Login({setIsLoggedIn}) {
 
 
   return (
+    
     <div className="overflow-hidden flex justify-center ">
       <div className="max-w-[80vw] flex items-center flex-col mb-[4vw] ">
         <h1 className="mt-[8vw] mb-[2vw] text-black font-bold text-4xl text-center">

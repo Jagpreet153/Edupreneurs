@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState , useContext,useEffect} from "react";
+import { UserContext } from '../../userContext';
 import Chatbot from "./chatbot/chatbot";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -50,6 +51,12 @@ function Dashboard() {
   // const [email, setEmail] = useState('');
   // const [isProfileOpen, setIsProfileOpen] = useState(false);
   // const [isLoggedIn,setIsLoggedIn]= useState(true);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log("User data in Dashboard:", user); // Debug log
+  }, [user]);
+
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -58,13 +65,12 @@ function Dashboard() {
       toast.success("Logged out successfully");
       const response = await axios
         .get("http://localhost:3000/api/v2/logout")
-        .then(() => {
           // setIsLoggedIn(false);
           localStorage.removeItem("token");
           console.log(response.data.message);
           navigate("/");
-        });
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(
         "Error during logout:",
         error.response ? error.response.data : error.message
@@ -136,8 +142,8 @@ function Dashboard() {
                       className="rounded-full h-60 w-60"
                     />
                   </li>
-                  <li className="font-bold text-xl">jdkhvfj</li>
-                  <li className="font-bold text-base">kvhjsjkd</li>
+                  <li className="font-bold text-xl">{user?.name}</li>
+                  <li className="font-bold text-base">{user?.email}</li>
                   <li
                     className="font-bold text-base"
                     role="button"
@@ -166,11 +172,11 @@ function Dashboard() {
                   </dialog>
                 </div>
                 <li className="font-bold text-2xl">
-                  {/* <Link to={"/"}> */}
+                  <Link to={"/"}>
                   <button className="flex gap-2 items-center" onClick={logout}>
                     LOGOUT <IoLogOutSharp className="h-8 w-8" />
                   </button>
-                  {/* </Link> */}
+                  </Link>
                 </li>
               </ul>
             </details>

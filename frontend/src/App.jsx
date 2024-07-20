@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/login/Login";
 import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
+import { UserProvider } from './userContext'
 import Signup from "./components/signup/Signup";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/dashboards/Dashboard";
@@ -35,6 +36,7 @@ function App() {
       ) : (
         <div>
        {/* <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
+      <UserProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -59,6 +61,7 @@ function App() {
         <Route path="/contactus" element={<ContactUs/>} />
         <Route path="/*" element={<Notfound />} />
       </Routes>
+      </UserProvider>
       </div>
       )}
     </div>

@@ -1,5 +1,6 @@
 // import React from 'react'
-import { useState } from "react";
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../userContext'
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -13,14 +14,16 @@ function Signup({setIsLoggedIn}) {
   const [password,setPassword]=useState("");
   const [confirmPassword,setConfirmPassword]=useState("");
   
-
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   async function submitHandler(event) {
     event.preventDefault();
-  
+    const user={name:name,email:email}
+    setUser(user);
+    
     if (password !== confirmPassword) {
       toast.error("Password does not match");
       return;
@@ -37,10 +40,12 @@ function Signup({setIsLoggedIn}) {
             email: email,
             password: password,
           };
+          // setUser({name: response.data.name , email: response.data.email})
           axios.post("http://localhost:3000/api/v2/createUser", details);
           toast.success("Account created successfully");
           setIsLoggedIn(true);
           navigate('/dashboard');
+         
         }
       
     }
