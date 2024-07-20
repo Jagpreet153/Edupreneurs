@@ -21,6 +21,7 @@ exports.checkUser=async (req,res)=>{
             const payload={
                 email:item.email,
                 id:item._id,
+                name:item.name,
                 role:item.role
                 }
                 if(await bcrypt.compare(password, item.password))
@@ -43,6 +44,7 @@ exports.checkUser=async (req,res)=>{
                         success:true,
                         item,
                         token,
+                        name:item.name,
                         message:"User loged in successfully" 
                     })
 
