@@ -38,7 +38,7 @@ function App() {
       ) : (
         <div>
           <UserProvider>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -53,7 +53,14 @@ function App() {
               <Route path="/*" element={<Notfound />} />
 
               {/* Routes that should use the Layout component */}
-              <Route element={<Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}>
+              <Route
+                element={
+                  <Layout
+                    isLoggedIn={isLoggedIn}
+                    setIsLoggedIn={setIsLoggedIn}
+                  />
+                }
+              >
                 <Route
                   path="/dashboard"
                   element={
@@ -63,11 +70,22 @@ function App() {
                   }
                 />
                 <Route path="/parentDashboard" element={<ParentDashboard />} />
-                <Route path="/studentDashboard" element={<StudentDashboard />} />
-                <Route path="/teacherDashboard" element={<TeacherDashboard />} />
-                <Route path="/contactus" element={<PrivateRoute isLoggedIn={isLoggedIn}>
+                <Route
+                  path="/studentDashboard"
+                  element={<StudentDashboard />}
+                />
+                <Route
+                  path="/teacherDashboard"
+                  element={<TeacherDashboard />}
+                />
+                <Route
+                  path="/contactus"
+                  element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
                       <ContactUs />
-                    </PrivateRoute>} />
+                    </PrivateRoute>
+                  }
+                />
                 {/* Add other routes that should use the Layout here */}
               </Route>
             </Routes>
@@ -84,8 +102,11 @@ export default App;
 // eslint-disable-next-line react/prop-types
 const Layout = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
-    <div className="w-screen h-screen" style={{ display: "flex", overflow: "hidden" }}>
-      <SideBar  isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+    <div
+      className="w-screen h-screen"
+      style={{ display: "flex", overflow: "hidden" }}
+    >
+      <SideBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <div
         className=""
         style={{ flex: "1 1 0", display: "flex", flexDirection: "column" }}
@@ -98,4 +119,3 @@ const Layout = ({ isLoggedIn, setIsLoggedIn }) => {
     </div>
   );
 };
-

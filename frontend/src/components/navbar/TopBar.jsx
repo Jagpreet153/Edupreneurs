@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
-import { useContext,useEffect} from "react";
-import { UserContext } from '../../userContext';
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../userContext";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo_svg from "../../assets/logo_svg.svg";
