@@ -1,5 +1,6 @@
 // import React from 'react'
-import { useState } from "react";
+import { useContext, useState } from 'react';
+import { UserContext } from '../../userContext'
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -13,48 +14,43 @@ function Signup({setIsLoggedIn}) {
   const [password,setPassword]=useState("");
   const [confirmPassword,setConfirmPassword]=useState("");
   
-
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   async function submitHandler(event) {
     event.preventDefault();
-  
+    const user={name:name,email:email}
+    setUser(user);
+    
     if (password !== confirmPassword) {
       toast.error("Password does not match");
       return;
     }
-  
-    try {
-      await axios.post("http://localhost:3000/api/v2/checkUser", { email , password });
 
-      toast.error("Account already exists");
-      return; 
-    } catch (err) {
-
-      if (err.response && err.response.status === 404) {
-
-        try {
-          const details = {
+    try{
+       const response= await axios .post('http://localhost:3000/api/v2/duplicateUser',{email})
+        if(response.data.exists===true){
+          toast.error("Account already exists");
+        }
+        else{
+            const details = {
             name: name,
             email: email,
             password: password,
           };
-          await axios.post("http://localhost:3000/api/v2/createUser", details);
-          console.log("Successfully SignUp.");
+          // setUser({name: response.data.name , email: response.data.email})
+          axios.post("http://localhost:3000/api/v2/createUser", details);
           toast.success("Account created successfully");
           setIsLoggedIn(true);
-          navigate('/login');
-        } catch (createErr) {
-          toast.error("Error occurred while creating account");
-          console.error(createErr);
+          navigate('/dashboard');
+         
         }
-      } else {
-
-        toast.error("Account already exists");
-        console.error(err);
-      }
+      
+    }
+    catch(err){
+      toast.error("Internal Server Error");
     }
   }
 
@@ -121,7 +117,7 @@ function Signup({setIsLoggedIn}) {
                 className="input input-bordered input-warning w-full"
               />
               <span
-                className="absolute right-4  top-11 scale-125 opacity-50"
+                className="absolute right-4  top-12 scale-125 opacity-50"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <GoEye /> : <GoEyeClosed />}
@@ -141,7 +137,7 @@ function Signup({setIsLoggedIn}) {
                 className="input input-bordered input-warning w-full"
               />
               <span
-                className="absolute right-4  top-11 scale-125 opacity-50"
+                className="absolute right-4  top-12 scale-125 opacity-50"
                 onClick={() => setShowConfirmPassword((prev) => !prev)}
               >
                 {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
