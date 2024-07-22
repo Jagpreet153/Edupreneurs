@@ -165,7 +165,7 @@ const Sidebar = (props) => {
             data-tip="Home"
           >
             <IoHomeOutline className="h-8 w-8 font-extrabold" />
-            {isMenuOpen && <span>Home</span>}
+            {isMenuOpen && <Link to="/">Home</Link>}
           </span>
         </li>
         <li>
@@ -223,8 +223,8 @@ const Sidebar = (props) => {
                 {isMenuOpen && <span>Notifications</span>}
               </span>
             </li>
-              <Link className="p-0 m-0" to={"/"}>
-            <li>
+            <Link className="p-0 m-0" to={"/"}>
+              <li>
                 <span
                   role="button"
                   onClick={logout}
@@ -236,8 +236,8 @@ const Sidebar = (props) => {
                   <IoLogOutOutline className="h-8 w-8 font-bold" />
                   {isMenuOpen && <span>Logout</span>}
                 </span>
-            </li>
-              </Link>
+              </li>
+            </Link>
           </>
         )}
       </ul>

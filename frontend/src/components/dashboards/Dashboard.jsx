@@ -58,11 +58,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-// function Dashboard(){
-//   <div className="h-full w-full bg-red-600">
-//     axhjbxhsbx
-//   </div>
-// }
-
-// export default Dashboard;

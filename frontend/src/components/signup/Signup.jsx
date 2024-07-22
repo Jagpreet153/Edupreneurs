@@ -1,19 +1,19 @@
 // import React from 'react'
-import { useContext, useState } from 'react';
-import { UserContext } from '../../userContext'
+import { useContext, useState } from "react";
+import { UserContext } from "../../userContext";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import home_svg from '../../assets/home_svg.svg'
+import home_svg from "../../assets/home_svg.svg";
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-function Signup({setIsLoggedIn}) {
-  const [name,setName]=useState("");
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
-  const [confirmPassword,setConfirmPassword]=useState("");
-  
+function Signup({ setIsLoggedIn }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -21,35 +21,34 @@ function Signup({setIsLoggedIn}) {
 
   async function submitHandler(event) {
     event.preventDefault();
-    const user={name:name,email:email}
+    const user = { name: name, email: email };
     setUser(user);
-    
+
     if (password !== confirmPassword) {
       toast.error("Password does not match");
       return;
     }
 
-    try{
-       const response= await axios .post('http://localhost:3000/api/v2/duplicateUser',{email})
-        if(response.data.exists===true){
-          toast.error("Account already exists");
-        }
-        else{
-            const details = {
-            name: name,
-            email: email,
-            password: password,
-          };
-          // setUser({name: response.data.name , email: response.data.email})
-          axios.post("http://localhost:3000/api/v2/createUser", details);
-          toast.success("Account created successfully");
-          setIsLoggedIn(true);
-          navigate('/dashboard');
-         
-        }
-      
-    }
-    catch(err){
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/v2/duplicateUser",
+        { email }
+      );
+      if (response.data.exists === true) {
+        toast.error("Account already exists");
+      } else {
+        const details = {
+          name: name,
+          email: email,
+          password: password,
+        };
+        // setUser({name: response.data.name , email: response.data.email})
+        axios.post("http://localhost:3000/api/v2/createUser", details);
+        toast.success("Account created successfully");
+        setIsLoggedIn(true);
+        navigate("/dashboard");
+      }
+    } catch (err) {
       toast.error("Internal Server Error");
     }
   }
@@ -82,12 +81,12 @@ function Signup({setIsLoggedIn}) {
                 Name<sup className="text-red-400">*</sup>
               </p>
               <input
-              type="text"
-              value={name}
-              onChange={(e)=>setName(e.target.value)}
-              placeholder="Type here"
-              className="input input-bordered input-warning w-full"
-               />
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Type here"
+                className="input input-bordered input-warning w-full"
+              />
             </label>
             <label>
               <p className="text-base  mb-[1vw] leading-5">
@@ -97,7 +96,7 @@ function Signup({setIsLoggedIn}) {
                 required
                 type="email"
                 value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
                 name="email"
                 className="input input-bordered input-warning w-full"
@@ -111,7 +110,7 @@ function Signup({setIsLoggedIn}) {
                 required
                 type={showPassword ? "text" : "password"}
                 value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="********"
                 name="password"
                 className="input input-bordered input-warning w-full"
@@ -131,7 +130,7 @@ function Signup({setIsLoggedIn}) {
                 required
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
-                onChange={(e)=>setConfirmPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="********"
                 name="confirmPassword"
                 className="input input-bordered input-warning w-full"
@@ -143,7 +142,9 @@ function Signup({setIsLoggedIn}) {
                 {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
               </span>
             </label>
-            <button className="btn btn-warning text-white mt-2">Create account</button>
+            <button className="btn btn-warning text-white mt-2">
+              Create account
+            </button>
           </form>
           <div className="flex justify-center items-center">
             <img className="w-[60vw]  sm:w-[32vw]" src={home_svg} alt="" />
@@ -151,7 +152,6 @@ function Signup({setIsLoggedIn}) {
         </div>
       </div>
     </div>
-
   );
 }
 
