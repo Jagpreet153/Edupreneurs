@@ -23,6 +23,9 @@ router.post("/changePassword" , changePassword);
 const {logout} = require("../controller/logout")
 router.get("/logout",logout);
 
+const {codeGenerator} = require("../controller/codeGenerator")
+router.post("/codeGenerator",codeGenerator);
+
 
 
 
