@@ -9,6 +9,19 @@ import { IoArrowDown, IoLogOutSharp, IoNotifications } from "react-icons/io5";
 function TopBar(props) {
   const { user } = useContext(UserContext);
 
+  const capitalizeFirstLetter = (str) => {
+     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+     return str.split(" ").map((name) => name[0]).join("").toUpperCase();
+  };
+
+  
+
+  // useEffect(() => {
+  //   if (user?.name) {
+  //     capitalizeFirstLetter(user.name);
+  //   }
+  // }, [user]);
+
   useEffect(() => {
     console.log("User data in Dashboard:", user); // Debug log
   }, [user]);
@@ -34,6 +47,9 @@ function TopBar(props) {
       );
     }
   };
+
+
+
 
   return (
     <div className="w-full h-20 bg-base-200 flex justify-between items-center">
@@ -69,17 +85,10 @@ function TopBar(props) {
             className="btn m-1 btn-ghost"
             // onClick={() => setIsProfileOpen((prev) => (!prev))}
           >
-            <div className="flex items-center gap-1">
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  className="rounded-full"
-                />
-              </div>
+              <div className=" flex justify-center  items-center w-[2.5rem] h-[2.5rem] rounded-full bg-[#88a4c4]"><span className="text-xl font-bold"> {capitalizeFirstLetter(user.name)} </span></div>
               <span>Profile</span>
               <IoArrowDown />
-            </div>
+            
           </summary>
           <ul
             // tabIndex={0}
@@ -87,11 +96,7 @@ function TopBar(props) {
           >
             <div className="flex flex-col gap-4 items-center">
               <li>
-                <img
-                  alt="Profile image"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  className="rounded-full h-60 w-60"
-                />
+                <div className=" flex justify-center  items-center w-[5rem] h-[5rem] rounded-full bg-[#88a4c4]"><span className="text-3xl font-bold"> {capitalizeFirstLetter(user.name)} </span></div>
               </li>
               <li className="font-bold text-xl">{user?.name}</li>
               <li className="font-bold text-base">{user?.email}</li>
