@@ -61,7 +61,7 @@ function Navbar(props) {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div className="hidden"></div>
       )}
     </div>
   );
