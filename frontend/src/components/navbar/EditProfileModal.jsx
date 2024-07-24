@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-
+import { useState,useContext } from "react";
+import { UserContext } from "../../userContext";
+import axios from "axios";
+import toast from "react-hot-toast";
 const EditProfileModal = ({ user }) => {
   const [name, setName] = useState(user?.name || "");
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-
-  const handleSaveChanges = (e) => {
+  const { setUser } = useContext(UserContext);
+  const handleSaveChanges = async(e) => {
     e.preventDefault();
     const formData = {
       name,
@@ -14,7 +16,25 @@ const EditProfileModal = ({ user }) => {
       gender,
       dateOfBirth,
     };
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
+    try {
+      const response = await axios.put("http://localhost:3000/api/v2/editProfile", {
+          name:name,
+          email: user?.email,
+          gender:gender,
+          dateOfBirth:dateOfBirth,
+      });
+      setUser(response.data.user);
+      if (response.data.message === 'Profile Edited') {
+        toast.success("Saved Changes");
+      } 
+      else {
+        toast.error("Failed to save changes");
+      }
+    } catch (error) {
+      console.error("Error saving changes:", error);
+      toast.error("Failed to change");
+    }
     // Add logic to save the data, e.g., make an API call.
     document.getElementById("edit_profile_modal").close();
   };

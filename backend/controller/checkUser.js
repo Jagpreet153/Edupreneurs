@@ -17,7 +17,7 @@ exports.checkUser=async (req,res)=>{
             })
         }
         else
-        {
+        { 
             const payload={
                 email:item.email,
                 id:item._id,
