@@ -6,15 +6,23 @@ import axios from "axios";
 import logo_svg from "../../assets/logo_svg.svg";
 import { IoArrowDown, IoLogOutSharp, IoNotifications } from "react-icons/io5";
 
+import EditProfileModal from "./EditProfileModal";
+
 function TopBar(props) {
   const { user } = useContext(UserContext);
 
-  const capitalizeFirstLetter = (str) => {
-     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-     return str.split(" ").map((name) => name[0]).join("").toUpperCase();
+  const openModal = () => {
+    document.getElementById("edit_profile_modal").showModal();
   };
 
-  
+  const capitalizeFirstLetter = (str) => {
+    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    return str
+      .split(" ")
+      .map((name) => name[0])
+      .join("")
+      .toUpperCase();
+  };
 
   // useEffect(() => {
   //   if (user?.name) {
@@ -47,9 +55,6 @@ function TopBar(props) {
       );
     }
   };
-
-
-
 
   return (
     <div className="w-full h-20 bg-base-200 flex justify-between items-center">
@@ -85,10 +90,14 @@ function TopBar(props) {
             className="btn m-1 btn-ghost"
             // onClick={() => setIsProfileOpen((prev) => (!prev))}
           >
-              <div className=" flex justify-center  items-center w-[2.5rem] h-[2.5rem] rounded-full bg-[#88a4c4]"><span className="text-xl font-bold"> {capitalizeFirstLetter(user.name)} </span></div>
-              <span>Profile</span>
-              <IoArrowDown />
-            
+            <div className=" flex justify-center  items-center w-[2.5rem] h-[2.5rem] rounded-full bg-[#88a4c4]">
+              <span className="text-xl font-bold">
+                {" "}
+                {capitalizeFirstLetter(user.name)}{" "}
+              </span>
+            </div>
+            <span>Profile</span>
+            <IoArrowDown />
           </summary>
           <ul
             // tabIndex={0}
@@ -96,35 +105,79 @@ function TopBar(props) {
           >
             <div className="flex flex-col gap-4 items-center">
               <li>
-                <div className=" flex justify-center  items-center w-[5rem] h-[5rem] rounded-full bg-[#88a4c4]"><span className="text-3xl font-bold"> {capitalizeFirstLetter(user.name)} </span></div>
+                <div className=" flex justify-center  items-center w-[5rem] h-[5rem] rounded-full bg-[#88a4c4]">
+                  <span className="text-3xl font-bold">
+                    {" "}
+                    {capitalizeFirstLetter(user.name)}{" "}
+                  </span>
+                </div>
               </li>
               <li className="font-bold text-xl">{user?.name}</li>
               <li className="font-bold text-base">{user?.email}</li>
               <li
                 className="font-bold text-base"
                 role="button"
-                onClick={() =>
-                  document.getElementById("edit_profile_modal").showModal()
-                }
+                onClick={openModal}
               >
                 Edit Profile
               </li>
-              <dialog
+              <EditProfileModal user={user} />
+              {/* <dialog
                 id="edit_profile_modal"
                 className="modal modal-bottom sm:modal-middle"
               >
                 <div className="modal-box">
-                  <h3 className="font-bold text-lg">Hello!</h3>
-                  <p className="py-4">
-                    Press ESC key or click the button below to close
-                  </p>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn">Close</button>
-                    </form>
+                  <form method="dialog">
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                      ✕
+                    </button>
+                  </form>
+                  <div className="flex flex-col items-center justify-center w-full">
+                    <label className="input input-bordered w-full border-secondary flex items-center gap-2 mt-4">
+                      Name:
+                      <input
+                        type="text"
+                        className="grow"
+                        defaultValue={user?.name}
+                      />
+                    </label>
+                    <label className="input input-bordered w-full border-secondary flex items-center gap-2 mt-4">
+                      Email:
+                      <input
+                        type="text"
+                        className="grow"
+                        // placeholder="daisy@site.com"
+                        value={user?.email}
+                        disabled
+                      />
+                    </label>
+                    <div className="flex border rounded-sm border-secondary w-full items-center gap-2 mt-4 pl-4">
+                      Gender:
+                      <select className="select w-full">
+                        <option disabled selected>
+                          Choose
+                        </option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                        <option>Prefer Not Say</option>
+                      </select>
+                    </div>
+                    <label className="input input-bordered border-secondary w-full flex items-center gap-2 mt-4">
+                      Date Of Birth:
+                      <input
+                        type="date"
+                        className="grow"
+                        // defaultValue={dateOfBirth}
+                      />
+                    </label>
+
+                    <button className="btn btn-primary mt-4">
+                      Save Changes
+                    </button>
                   </div>
-                </div>
-              </dialog>
+                </div> */}
+              {/* </dialog> */}
             </div>
             <li className="font-bold text-2xl">
               <Link to={"/"}>

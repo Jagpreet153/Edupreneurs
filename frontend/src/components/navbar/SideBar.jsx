@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../../userContext";
+
 import {
   IoAddCircle,
   IoHomeOutline,
@@ -13,16 +15,22 @@ import {
 } from "react-icons/io5";
 import { MdOutlineSpaceDashboard, MdOutlineSupportAgent } from "react-icons/md";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
+import EditProfileModal from "./EditProfileModal";
 
 const Sidebar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAddNewClassOpen, setIsAddNewClassOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isMediumScreen, setIsMediumScreen] = useState(false);
+  const { user } = useContext(UserContext);
 
   // eslint-disable-next-line react/prop-types
   let setIsLoggedIn = props.setIsLoggedIn;
   const navigate = useNavigate();
+
+  const openModal = () => {
+    document.getElementById("edit_profile_modal").showModal();
+  };
 
   const logout = async (event) => {
     try {
@@ -201,7 +209,7 @@ const Sidebar = (props) => {
         </li>
         {isMediumScreen && (
           <>
-            <li>
+            <li role="button" onClick={openModal}>
               <span
                 className={`flex ${
                   isMenuOpen ? "" : "tooltip tooltip-right"
@@ -212,6 +220,7 @@ const Sidebar = (props) => {
                 {isMenuOpen && <span>Profile</span>}
               </span>
             </li>
+            <EditProfileModal user={user} />
             <li>
               <span
                 className={`flex ${
