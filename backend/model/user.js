@@ -24,6 +24,15 @@ const userSchema ={
         type: Date,
         default: null
       },
+      gender: {
+        type: String,
+        default: null
+      },
+      dob: {
+        type: String,
+        default: null
+      },
+
 }
 
 module.exports = mongoose.model("User",userSchema)

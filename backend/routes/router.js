@@ -18,13 +18,16 @@ router.post("/getotp" , getotp);
 const {changePassword} = require("../controller/changePassword")
 router.post("/changePassword" , changePassword);
 
-//const { auth } = require('../middleware/Auth');
+// const { auth } = require('../middleware/Auth');
 
 const {logout} = require("../controller/logout")
 router.get("/logout",logout);
 
 const {codeGenerator} = require("../controller/codeGenerator")
 router.post("/codeGenerator",codeGenerator);
+
+const {editProfile} = require("../controller/editProfile")
+router.put("/editProfile",editProfile);
 
 
 
