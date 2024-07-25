@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../userContext";
+// import { FaIndianRupeeSign } from "react-icons/fa6";
 
 import {
   IoAddCircle,
@@ -15,7 +16,9 @@ import {
 } from "react-icons/io5";
 import { MdOutlineSpaceDashboard, MdOutlineSupportAgent } from "react-icons/md";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
-import EditProfileModal from "./EditProfileModal";
+import EditProfileModal from "../modals/EditProfileModal";
+import CreateClassModal from "../modals/CreateClassModal";
+import JoinClassModal from "../modals/JoinClassModal";
 
 const Sidebar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,8 +31,14 @@ const Sidebar = (props) => {
   let setIsLoggedIn = props.setIsLoggedIn;
   const navigate = useNavigate();
 
-  const openModal = () => {
+  const openEditProfileModal = () => {
     document.getElementById("edit_profile_modal").showModal();
+  };
+  const openCreateClassModal = () => {
+    document.getElementById("create_class_modal").showModal();
+  };
+  const openJoinClassModal = () => {
+    document.getElementById("join_class_modal").showModal();
   };
 
   const logout = async (event) => {
@@ -108,53 +117,19 @@ const Sidebar = (props) => {
               <li
                 role="button"
                 className="bg-base-300 p-2 w-fit"
-                onClick={() =>
-                  document.getElementById("create_class_modal").showModal()
-                }
+                onClick={openCreateClassModal}
               >
                 Create a Class
               </li>
-              <dialog
-                id="create_class_modal"
-                className="modal modal-bottom sm:modal-middle"
-              >
-                <div className="modal-box">
-                  <h3 className="font-bold text-lg">Hello!</h3>
-                  <p className="py-4">
-                    Press ESC key or click the button below to close
-                  </p>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn">Close</button>
-                    </form>
-                  </div>
-                </div>
-              </dialog>
+              <CreateClassModal />
               <li
                 role="button"
                 className="bg-base-300 p-2 w-fit"
-                onClick={() =>
-                  document.getElementById("join_class_modal").showModal()
-                }
+                onClick={openJoinClassModal}
               >
                 Join a Class
               </li>
-              <dialog
-                id="join_class_modal"
-                className="modal modal-bottom sm:modal-middle"
-              >
-                <div className="modal-box">
-                  <h3 className="font-bold text-lg">Hello!</h3>
-                  <p className="py-4">
-                    Press ESC key or click the button below to close
-                  </p>
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button className="btn">Close</button>
-                    </form>
-                  </div>
-                </div>
-              </dialog>
+              <JoinClassModal />
             </ul>
           )}
         </li>
@@ -209,7 +184,7 @@ const Sidebar = (props) => {
         </li>
         {isMediumScreen && (
           <>
-            <li role="button" onClick={openModal}>
+            <li role="button" onClick={openEditProfileModal}>
               <span
                 className={`flex ${
                   isMenuOpen ? "" : "tooltip tooltip-right"

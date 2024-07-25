@@ -6,7 +6,7 @@ import axios from "axios";
 import logo_svg from "../../assets/logo_svg.svg";
 import { IoArrowDown, IoLogOutSharp, IoNotifications } from "react-icons/io5";
 
-import EditProfileModal from "./EditProfileModal";
+import EditProfileModal from "../modals/EditProfileModal";
 
 function TopBar(props) {
   const { user } = useContext(UserContext);
@@ -122,62 +122,6 @@ function TopBar(props) {
                 Edit Profile
               </li>
               <EditProfileModal user={user} />
-              {/* <dialog
-                id="edit_profile_modal"
-                className="modal modal-bottom sm:modal-middle"
-              >
-                <div className="modal-box">
-                  <form method="dialog">
-                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                      ✕
-                    </button>
-                  </form>
-                  <div className="flex flex-col items-center justify-center w-full">
-                    <label className="input input-bordered w-full border-secondary flex items-center gap-2 mt-4">
-                      Name:
-                      <input
-                        type="text"
-                        className="grow"
-                        defaultValue={user?.name}
-                      />
-                    </label>
-                    <label className="input input-bordered w-full border-secondary flex items-center gap-2 mt-4">
-                      Email:
-                      <input
-                        type="text"
-                        className="grow"
-                        // placeholder="daisy@site.com"
-                        value={user?.email}
-                        disabled
-                      />
-                    </label>
-                    <div className="flex border rounded-sm border-secondary w-full items-center gap-2 mt-4 pl-4">
-                      Gender:
-                      <select className="select w-full">
-                        <option disabled selected>
-                          Choose
-                        </option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                        <option>Prefer Not Say</option>
-                      </select>
-                    </div>
-                    <label className="input input-bordered border-secondary w-full flex items-center gap-2 mt-4">
-                      Date Of Birth:
-                      <input
-                        type="date"
-                        className="grow"
-                        // defaultValue={dateOfBirth}
-                      />
-                    </label>
-
-                    <button className="btn btn-primary mt-4">
-                      Save Changes
-                    </button>
-                  </div>
-                </div> */}
-              {/* </dialog> */}
             </div>
             <li className="font-bold text-2xl">
               <Link to={"/"}>
@@ -189,7 +133,6 @@ function TopBar(props) {
           </ul>
         </details>
       </div>
-      {/* <Dashboard /> */}
     </div>
   );
 }

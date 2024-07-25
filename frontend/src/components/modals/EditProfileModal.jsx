@@ -10,12 +10,12 @@ const EditProfileModal = ({ user }) => {
   const { setUser } = useContext(UserContext);
   const handleSaveChanges = async(e) => {
     e.preventDefault();
-    const formData = {
-      name,
-      email: user?.email,
-      gender,
-      dateOfBirth,
-    };
+    // const formData = {
+    //   name,
+    //   email: user?.email,
+    //   gender,
+    //   dateOfBirth,
+    // };
     // console.log("Form Data:", formData);
     try {
       const response = await axios.put("http://localhost:3000/api/v2/editProfile", {
