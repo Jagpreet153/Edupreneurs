@@ -1,15 +1,36 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import ClassPackages from "./ClassPackages";
-
+import axios from 'axios';
+import toast from "react-hot-toast";
+import { UserContext } from "../../userContext";
 const CreateClassModal = () => {
   const [selectedPackage, setSelectedPackage] = useState(ClassPackages[0]);
-
+  const { user } = useContext(UserContext);
   const handleCreateClass = async () => {
     const requestCreateClassData = {
+      email: user?.email,
       packageId: selectedPackage.id,
+      className: selectedPackage.name,
+      amount: selectedPackage.amount,
+      maxStudents: selectedPackage.maxStudents,
+      parent: selectedPackage.parents,
+      role:"FACULTY"
     };
-  };
+
+    try{
+      const response = await axios.post("http://localhost:3000/api/v2/createClass", requestCreateClassData);
+      if(response.data.message === 'Class created successfully'){
+        toast.success("Class created successfully");
+      }
+
+    }
+    catch(error){
+      console.error("Error creating class:", error);
+      toast.error("Failed to create class");
+    }
+    
+  }
 
   return (
     <dialog id="create_class_modal" className="modal modal-bottom sm:modal-middle">
