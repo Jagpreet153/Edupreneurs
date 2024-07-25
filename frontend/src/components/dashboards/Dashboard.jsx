@@ -1,4 +1,4 @@
-import Chatbot from "./chatbot/chatbot";
+// import Chatbot from "./chatbot/chatbot";
 
 export const cards = [
   {
