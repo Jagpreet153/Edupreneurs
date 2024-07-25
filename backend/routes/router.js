@@ -23,8 +23,8 @@ router.post("/changePassword" , changePassword);
 const {logout} = require("../controller/logout")
 router.get("/logout",logout);
 
-const {codeGenerator} = require("../controller/codeGenerator")
-router.post("/codeGenerator",codeGenerator);
+const {createClass} = require("../controller/createClass")
+router.post("/createClass",createClass);
 
 const {editProfile} = require("../controller/editProfile")
 router.put("/editProfile",editProfile);
