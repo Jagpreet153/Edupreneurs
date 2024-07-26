@@ -6,26 +6,34 @@ import toast from "react-hot-toast";
 import { UserContext } from "../../userContext";
 const CreateClassModal = () => {
   const [selectedPackage, setSelectedPackage] = useState(ClassPackages[0]);
-  const { user } = useContext(UserContext);
+  const { user,addClass,setClasses } = useContext(UserContext);
   const handleCreateClass = async () => {
+    document.getElementById("create_class_modal").close();
+        toast.loading("Creating class...");
     const requestCreateClassData = {
       email: user?.email,
+      dateStart: new Date().toISOString(),
       packageId: selectedPackage.id,
       className: selectedPackage.name,
       amount: selectedPackage.amount,
       maxStudents: selectedPackage.maxStudents,
       parent: selectedPackage.parents,
       role:"FACULTY"
-    };
+  };
+   
 
     try{
       const response = await axios.post("http://localhost:3000/api/v2/createClass", requestCreateClassData);
       if(response.data.message === 'Class created successfully'){
-        toast.success("Class created successfully");
+        toast.dismiss();
+        toast.success("Class created successfully"); 
       }
-
+      const newClass =requestCreateClassData;
+      console.log("New class data from backend:", newClass);
+      addClass(newClass);
     }
     catch(error){
+      toast.dismiss();
       console.error("Error creating class:", error);
       toast.error("Failed to create class");
     }
@@ -38,7 +46,7 @@ const CreateClassModal = () => {
         <form method="dialog">
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            // onClick={onClose}
+          
           >
             ✕
           </button>
