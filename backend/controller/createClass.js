@@ -79,20 +79,6 @@ exports.createClass=async(req,res)=>{
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    
-    const newClass = {
-      role,
-      packageId,
-      className,
-      amount,
-      maxStudents,
-      parent: parent || null,
-      createdAt: new Date(),
-    };
-    
-    user.classes.push(newClass);
-    await user.save();
-    
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       host: "localhost",
@@ -112,8 +98,24 @@ exports.createClass=async(req,res)=>{
         text: `Congratulations , for creating a new class . Your code for joining class: ${code}`
       };
       await transporter.sendMail(mailOptions);
+    const newClass = {
+      role,
+      packageId,
+      className,
+      amount,
+      maxStudents,
+      parent: parent || null,
+      createdAt: new Date(),
+     
+    };
     
-    res.status(201).json({ message: 'Class created successfully', class: newClass });
+    user.classes.push(newClass);
+    await user.save();
+    
+   
+    
+    res.status(201).json(
+      { message: 'Class created successfully', class: newClass });
   } catch (error) {
     console.error('Error creating classes:', error);
     res.status(500).json({ message: 'Error creating class', error: error.message });

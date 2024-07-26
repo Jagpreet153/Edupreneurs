@@ -30,7 +30,11 @@ const classDetail = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
+  // code: {
+  //   type: String,
+  //   default: null
+  // },
 }, { _id: false });
 
 
