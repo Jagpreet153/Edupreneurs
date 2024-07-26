@@ -15,7 +15,7 @@ import ParentDashboard from "./components/dashboards/ParentDashboard";
 import StudentDashboard from "./components/dashboards/StudentDashboard";
 import TeacherDashboard from "./components/dashboards/TeacherDashboard";
 import Notfound from "./components/Notfound/Notfound";
-
+import EdupreneursLandingPage from "./components/LandingPage/LandingPage";
 import Preloader from "./components/preloader/preloader";
 import { useState, useEffect } from "react";
 import ContactUs from "./components/conatctUs/ContactUs";
@@ -51,6 +51,7 @@ function App() {
                 element={<Signup setIsLoggedIn={setIsLoggedIn} />}
               />
               <Route path="/*" element={<Notfound />} />
+              <Route path="/landingPage" element={<EdupreneursLandingPage />} />
 
               {/* Routes that should use the Layout component */}
               <Route
