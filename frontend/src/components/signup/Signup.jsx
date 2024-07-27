@@ -85,7 +85,7 @@ function Signup({ setIsLoggedIn }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Type here"
-                className="input input-bordered input-warning w-full"
+                className="input input-bordered input-secondary w-full"
               />
             </label>
             <label>
@@ -99,7 +99,7 @@ function Signup({ setIsLoggedIn }) {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
                 name="email"
-                className="input input-bordered input-warning w-full"
+                className="input input-bordered input-secondary w-full"
               />
             </label>
             <label className="relative">
@@ -113,7 +113,7 @@ function Signup({ setIsLoggedIn }) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="********"
                 name="password"
-                className="input input-bordered input-warning w-full"
+                className="input input-bordered input-secondary w-full"
               />
               <span
                 className="absolute right-4  top-12 scale-125 opacity-50"
@@ -133,7 +133,7 @@ function Signup({ setIsLoggedIn }) {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="********"
                 name="confirmPassword"
-                className="input input-bordered input-warning w-full"
+                className="input input-bordered input-secondary w-full"
               />
               <span
                 className="absolute right-4  top-12 scale-125 opacity-50"
@@ -142,7 +142,7 @@ function Signup({ setIsLoggedIn }) {
                 {showConfirmPassword ? <GoEye /> : <GoEyeClosed />}
               </span>
             </label>
-            <button className="btn btn-warning text-white mt-2">
+            <button className="btn btn-secondary text-white mt-2">
               Create account
             </button>
           </form>
