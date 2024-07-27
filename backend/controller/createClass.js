@@ -106,7 +106,7 @@ exports.createClass=async(req,res)=>{
       maxStudents,
       parent: parent || null,
       createdAt: new Date(),
-     
+      code:code
     };
     
     user.classes.push(newClass);
