@@ -46,7 +46,7 @@ function TopBar(props) {
       const response = await axios.get("http://localhost:3000/api/v2/logout");
       setIsLoggedIn(false);
       localStorage.removeItem("token");
-      setClasses([]);
+      setClasses(null);
       console.log(response.data.message);
       navigate("/");
     } catch (error) {
