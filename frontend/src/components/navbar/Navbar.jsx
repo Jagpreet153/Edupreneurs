@@ -12,7 +12,7 @@ function Navbar(props) {
     <div>
       {!isLoggedIn ? (
         <div>
-          <div className="flex justify-evenly items-center bg-warning text-warning-content">
+          <div className="flex justify-evenly items-center bg-secondary text-secondary-content">
             <Link to="/">
               <img src={logo} alt="" width={240} loading="lazy" />
             </Link>
