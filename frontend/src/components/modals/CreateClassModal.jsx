@@ -28,9 +28,10 @@ const CreateClassModal = () => {
         toast.dismiss();
         toast.success("Class created successfully"); 
       }
-      const newClass =requestCreateClassData;
-      console.log("New class data from backend:", newClass);
-      addClass(newClass);
+      const code =await response.data.class.code;
+      // console.log("New class data from backend:", newClass);
+      addClass(requestCreateClassData,code);
+      console.log(requestCreateClassData);
     }
     catch(error){
       toast.dismiss();

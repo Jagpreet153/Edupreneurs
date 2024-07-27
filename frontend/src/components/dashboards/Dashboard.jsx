@@ -37,7 +37,7 @@ function Dashboard() {
                   <p>Start Date: {item?.dateStart}</p>
                   <p>Role: {item?.role}</p>
                   <p>Max Students: {item?.maxStudents}</p>
-                  <p>Parent: {item?.parent}</p>
+                  <p>Parent: {item?.parent? "Enabled" : "Disabled"}</p>
                   {/* <p>Class Code: {item?.code}</p> */}
                   <div className="card-actions justify-end">
                     <button className="btn btn-primary">Open</button>
