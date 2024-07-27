@@ -7,7 +7,6 @@ import { UserContext } from "../../userContext";
 
 import {
   IoAddCircle,
-  IoHomeOutline,
   IoCalendarNumberOutline,
   IoInformationCircleOutline,
   IoPersonOutline,
@@ -134,53 +133,56 @@ const Sidebar = (props) => {
           )}
         </li>
         <li>
-          <span
-            className={`flex ${isMenuOpen ? "" : "tooltip tooltip-right"} p-4`}
-            data-tip="Dashboard"
-          >
-            <MdOutlineSpaceDashboard className="h-8 w-8 font-bold" />
-            {isMenuOpen && <Link to="/dashboard">DashBoard</Link>}
-          </span>
+          <Link className="m-0 p-0" to="/dashboard">
+            <span
+              className={`flex gap-2 ${
+                isMenuOpen ? "" : "tooltip tooltip-right"
+              } p-4`}
+              data-tip="Dashboard"
+            >
+              <MdOutlineSpaceDashboard className="h-8 w-8 font-bold" />
+              {isMenuOpen && <span>DashBoard</span>}
+            </span>
+          </Link>
         </li>
         <li>
-          <span
-            className={`flex ${isMenuOpen ? "" : "tooltip tooltip-right"} p-4`}
-            data-tip="Home"
-          >
-            <IoHomeOutline className="h-8 w-8 font-extrabold" />
-            {isMenuOpen && <Link to="/">Home</Link>}
-          </span>
+          <Link className="m-0 p-0" to="/dashboard">
+            <span
+              className={`flex gap-2 ${
+                isMenuOpen ? "" : "tooltip tooltip-right"
+              } p-4`}
+              data-tip="Calendar"
+            >
+              <IoCalendarNumberOutline className="h-8 w-8 font-extrabold" />
+              {isMenuOpen && <span>Calendar</span>}
+            </span>
+          </Link>
         </li>
         <li>
-          <span
-            className={`flex ${isMenuOpen ? "" : "tooltip tooltip-right"} p-4`}
-            data-tip="Calendar"
-          >
-            <IoCalendarNumberOutline className="h-8 w-8 font-extrabold" />
-            {isMenuOpen && <span>Calendar</span>}
-          </span>
+          <Link className="m-0 p-0" to="/contactus">
+            <span
+              className={`flex gap-2 ${
+                isMenuOpen ? "" : "tooltip tooltip-right"
+              } p-4`}
+              data-tip="Contact Us"
+            >
+              <MdOutlineSupportAgent className="h-8 w-8 font-bold" />
+              {isMenuOpen && <span>Contact Us</span>}
+            </span>
+          </Link>
         </li>
         <li>
-          <span
-            className={`flex ${isMenuOpen ? "" : "tooltip tooltip-right"} p-4`}
-            data-tip="Contact Us"
-          >
-            <MdOutlineSupportAgent className="h-8 w-8 font-bold" />
-            {isMenuOpen && (
-              <span>
-                <Link to="/contactus">Contact Us</Link>
-              </span>
-            )}
-          </span>
-        </li>
-        <li>
-          <span
-            className={`flex ${isMenuOpen ? "" : "tooltip tooltip-right"} p-4`}
-            data-tip="About Us"
-          >
-            <IoInformationCircleOutline className="h-8 w-8 font-bold" />
-            {isMenuOpen && <span>About Us</span>}
-          </span>
+          <Link className="m-0 p-0" to="/aboutus">
+            <span
+              className={`flex gap-2 ${
+                isMenuOpen ? "" : "tooltip tooltip-right"
+              } p-4`}
+              data-tip="About Us"
+            >
+              <IoInformationCircleOutline className="h-8 w-8 font-bold" />
+              {isMenuOpen && <span>About Us</span>}
+            </span>
+          </Link>
         </li>
         {isMediumScreen && (
           <>

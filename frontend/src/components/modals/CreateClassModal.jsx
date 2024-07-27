@@ -5,6 +5,7 @@ import axios from 'axios';
 import toast from "react-hot-toast";
 import { UserContext } from "../../userContext";
 const CreateClassModal = () => {
+  const [className, setClassName] = useState("");
   const [selectedPackage, setSelectedPackage] = useState(ClassPackages[0]);
   const { user,addClass,setClasses } = useContext(UserContext);
   const handleCreateClass = async () => {
@@ -14,11 +15,11 @@ const CreateClassModal = () => {
       email: user?.email,
       dateStart: new Date().toISOString(),
       packageId: selectedPackage.id,
-      className: selectedPackage.name,
+      className: className,
       amount: selectedPackage.amount,
       maxStudents: selectedPackage.maxStudents,
       parent: selectedPackage.parents,
-      role:"FACULTY"
+      role:"FACULTY",
   };
    
 
@@ -52,17 +53,17 @@ const CreateClassModal = () => {
           </button>
         </form>
         <div>
-          <div className="flex flex-col gap-4 p-4">
+          <div className="flex flex-col gap-4 p-4 ">
             {ClassPackages.map((classpackage, index) => (
-              <div key={index} className="flex flex-col bg-primary p-2">
+              <div key={index} className="flex flex-col bg-secondary p-4">
                 <input
                   type="radio"
                   name="selectedpackage"
-                  className="radio radio-accent"
+                  className="radio bg-white border border-black"
                   defaultChecked={index === 0}
                   onChange={() => setSelectedPackage(classpackage)}
                 />
-                <div className="primary-content text-xl">
+                <div className="text-secondary-content text-xl">
                   {classpackage.name}
                 </div>
                 <div className="flex items-center text-success font-bold text-2xl justify-center">
@@ -71,20 +72,24 @@ const CreateClassModal = () => {
                   </span>
                   <span>{classpackage.amount}/month</span>
                 </div>
-                <div className="primary-content text-lg">
-                  <span>
+                <div className="text-secondary-content text-lg">
+                  <span className="text-wrap">
                     Max {classpackage.maxStudents} Students Allowed
                   </span>
                 </div>
-                <div className="primary-content text-lg">
-                  <span>Parents Dashboard: </span>
+                <div className="text-secondary-content text-lg">
+                  <span className="text-wrap">Parents Dashboard: </span>
                   {classpackage.parents ? "Enabled" : "Not Enabled"}
                 </div>
               </div>
             ))}
-            <button className="btn btn-secondary mt-4" onClick={handleCreateClass}>
+            <div className="flex gap-0 justify-center items-center">
+
+            <input type="text" required name="className" onChange={(e) => setClassName(e.target.value)} placeholder="Enter Class Name Here" className="input input-bordered rounded-r-none w-full max-w-xs" />
+            <button className="btn btn-secondary rounded-l-none" onClick={handleCreateClass}>
               Create Class
             </button>
+            </div>
           </div>
         </div>
       </div>
