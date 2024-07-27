@@ -7,6 +7,7 @@ import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import TopBar from "./components/navbar/TopBar";
 import SideBar from "./components/navbar/SideBar";
+import AboutUs from "./components/AboutUs/AboutUs";
 import { UserProvider } from "./userContext";
 import Signup from "./components/signup/Signup";
 import PrivateRoute from "./components/PrivateRoute";
@@ -15,7 +16,6 @@ import ParentDashboard from "./components/dashboards/ParentDashboard";
 import StudentDashboard from "./components/dashboards/StudentDashboard";
 import TeacherDashboard from "./components/dashboards/TeacherDashboard";
 import Notfound from "./components/Notfound/Notfound";
-import EdupreneursLandingPage from "./components/LandingPage/LandingPage";
 import Preloader from "./components/preloader/preloader";
 import { useState, useEffect } from "react";
 import ContactUs from "./components/conatctUs/ContactUs";
@@ -38,7 +38,7 @@ function App() {
       ) : (
         <div>
           <UserProvider>
-            <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Navbar isLoggedIn={isLoggedIn} />
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -50,10 +50,9 @@ function App() {
                 path="/signup"
                 element={<Signup setIsLoggedIn={setIsLoggedIn} />}
               />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
               <Route path="/*" element={<Notfound />} />
-              <Route path="/landingPage" element={<EdupreneursLandingPage />} />
-
-              {/* Routes that should use the Layout component */}
               <Route
                 element={
                   <Layout
@@ -84,6 +83,14 @@ function App() {
                   element={
                     <PrivateRoute isLoggedIn={isLoggedIn}>
                       <ContactUs />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/aboutus"
+                  element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                      <AboutUs />
                     </PrivateRoute>
                   }
                 />

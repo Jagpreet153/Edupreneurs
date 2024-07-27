@@ -34,7 +34,7 @@ function Dashboard() {
               >
                 <div className="card-body items-center text-center">
                   <h2 className="card-title">{item?.className}</h2>
-                  <p>Start Date: {item?.dateStart}</p>
+                  <p>Package Name: {item?.packageId}</p>
                   <p>Role: {item?.role}</p>
                   <p>Max Students: {item?.maxStudents}</p>
                   <p>Parent: {item?.parent? "Enabled" : "Disabled"}</p>
