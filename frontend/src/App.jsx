@@ -38,7 +38,7 @@ function App() {
       ) : (
         <div>
           <UserProvider>
-            <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Navbar isLoggedIn={isLoggedIn} />
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -50,14 +50,8 @@ function App() {
                 path="/signup"
                 element={<Signup setIsLoggedIn={setIsLoggedIn} />}
               />
-              <Route
-                path="/about"
-                element={<AboutUs />}
-              />
-              <Route
-                path="/contact"
-                element={<ContactUs />}
-              />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
               <Route path="/*" element={<Notfound />} />
               <Route
                 element={
