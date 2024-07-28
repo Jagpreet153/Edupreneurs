@@ -34,8 +34,14 @@ export const UserProvider = ({ children }) => {
         console.warn("prevClasses is not an array:", prevClasses);
         return [newClass];
       }
-      return [...prevClasses, newClass];
+      // Ensure the newClass object includes all necessary properties, including the code
+      const updatedNewClass = {
+        ...newClass,
+        code: newClass.code // Fallback in case code is not provided
+      };
+      return [...prevClasses, updatedNewClass];
     });
+     
   };
   
 

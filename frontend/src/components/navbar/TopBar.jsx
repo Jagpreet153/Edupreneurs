@@ -47,6 +47,7 @@ function TopBar(props) {
       setIsLoggedIn(false);
       localStorage.removeItem("token");
       setClasses([]);
+      localStorage.removeItem("classes");
       console.log(response.data.message);
       navigate("/");
     } catch (error) {

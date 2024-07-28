@@ -29,6 +29,9 @@ router.post("/createClass",createClass);
 const {editProfile} = require("../controller/editProfile")
 router.put("/editProfile",editProfile);
 
+const {checkClasscode} = require("../controller/checkClasscode")
+router.post("/checkClasscode",checkClasscode);
+
 
 
 
