@@ -4,7 +4,7 @@ import { UserContext } from "../../userContext";
 
 function Dashboard() {
   const { classes,user } = useContext(UserContext);
-  const [localClasses, setLocalClasses] = useState(classes);
+  const [localClasses, setLocalClasses] = useState([]);
   console.log(classes);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Dashboard() {
               >
                 <div className="card-body items-center text-center">
                   <h2 className="card-title">{item?.className}</h2>
-                  <p>Package Name: {item?.packageId}</p>
+                  <p>Package Name: {item?.packageName}</p>
                   <p>Role: {item?.role}</p>
                   <p>Max Students: {item?.maxStudents}</p>
                   <p>Parent: {item?.parent? "Enabled" : "Disabled"}</p>

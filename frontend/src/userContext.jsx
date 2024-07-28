@@ -41,6 +41,7 @@ export const UserProvider = ({ children }) => {
       };
       return [...prevClasses, updatedNewClass];
     });
+     
   };
   
 

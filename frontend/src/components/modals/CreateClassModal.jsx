@@ -14,7 +14,7 @@ const CreateClassModal = () => {
     const requestCreateClassData = {
       email: user?.email,
       dateStart: new Date().toISOString(),
-      packageId: selectedPackage.id,
+      packageName: selectedPackage.name,
       className: className,
       amount: selectedPackage.amount,
       maxStudents: selectedPackage.maxStudents,
@@ -29,15 +29,16 @@ const CreateClassModal = () => {
         toast.dismiss();
         toast.success("Class created successfully"); 
       }
-      // const code =await response.data.class.code;
-      // console.log("New class data from backend:", newClass);
-      // const updatedClassData = {
-      //   ...requestCreateClassData,
-      //   code: code
-      // };
-      const updatedClassData = response.data.class;
-      addClass(updatedClassData);
+      const code =await response.data.class.code;
+      const updatedClassData = {
+        ...requestCreateClassData,
+        code: code
+      };
+      addClass(updatedClassData,code);
+
       // console.log(requestCreateClassData);
+      // const classes =await response.data.class;
+      // await addClass(classes);
     }
     catch(error){
       toast.dismiss();
