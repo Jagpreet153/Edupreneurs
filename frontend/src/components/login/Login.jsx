@@ -49,7 +49,7 @@ function Login({ setIsLoggedIn }) {
     }
     toast.loading("Sending OTP...");
     try {
-      const response = await axios.post("http://localhost:3000/api/v2/getotp", {
+      const response = await axios.post("https://edupreneurs.vercel.app/api/v2/getotp", {
         email: reemail,
       });
       if (response.data.message === "OTP sent successfully") {
@@ -77,7 +77,7 @@ function Login({ setIsLoggedIn }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v2/changePassword",
+        "https://edupreneurs.vercel.app/api/v2/changePassword",
         {
           email: reemail,
           otp: otp,

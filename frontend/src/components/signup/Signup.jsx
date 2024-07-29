@@ -18,7 +18,7 @@ function Signup({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = true;
   async function submitHandler(event) {
     event.preventDefault();
     const user = { name: name, email: email };
@@ -43,7 +43,7 @@ function Signup({ setIsLoggedIn }) {
           password: password,
         };
         // setUser({name: response.data.name , email: response.data.email})
-        axios.post("http://localhost:3000/api/v2/createUser", details);
+        axios.post("https://edupreneurs.vercel.app/api/v2/createUser", details);
         toast.success("Account created successfully");
         setIsLoggedIn(true);
         navigate("/dashboard");
