@@ -20,11 +20,11 @@ function Login({ setIsLoggedIn }) {
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  axios.defaults.withCredentials = true;
   async function submitHandler(event) {
     event.preventDefault();
     try {
       const res = await axios.post("https://edupreneurs-backend.vercel.app/api/v2/checkUser", {
+        withCredentials : true,
         email,
         password,
       });
@@ -50,6 +50,7 @@ function Login({ setIsLoggedIn }) {
     toast.loading("Sending OTP...");
     try {
       const response = await axios.post("https://edupreneurs-backend.vercel.app/api/v2/getotp", {
+        withCredentials : true,
         email: reemail,
       });
       if (response.data.message === "OTP sent successfully") {
@@ -79,6 +80,7 @@ function Login({ setIsLoggedIn }) {
       const response = await axios.post(
         "https://edupreneurs-backend.vercel.app/api/v2/changePassword",
         {
+          withCredentials : true,
           email: reemail,
           otp: otp,
           newPassword: newpassword,
