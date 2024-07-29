@@ -19,6 +19,8 @@ app.use(cors(
     }
 ));
 
+mongoose.connect("mongodb+srv://jskhurana:Jagpreet153@cluster0.zrpydx2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
