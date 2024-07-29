@@ -20,7 +20,6 @@ const JoinClassModal = () => {
       const response = await axios.post("http://localhost:3000/api/v2/checkClasscode", requestJoinClassData);
       if(response.data.message === 'Class found'){
         toast.success("Class joined successfully");
-        
       }
     }
     catch(error){

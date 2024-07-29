@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../model/user'); // Adjust the path as needed
 const nodemailer = require('nodemailer');
-
+const Class = require('../model/class');
 // Create a new class
 
 function generateCode() {
@@ -55,7 +55,11 @@ exports.createClass=async(req,res)=>{
     user.classes.push(newClass);
     await user.save();
     
-   
+   const classMembers = await Class.create({
+        email: user?.email,
+        participant: null,
+   });
+   console.log(classMembers);
     
     res.status(201).json(
       { message: 'Class created successfully', class: newClass }

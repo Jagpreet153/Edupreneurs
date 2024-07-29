@@ -1,5 +1,5 @@
 const User = require("../model/user");
-
+const Class = require("../model/class");
 exports.checkClasscode = async (req, res) => {
     const { email, classCode } = req.body;
 
@@ -15,6 +15,12 @@ exports.checkClasscode = async (req, res) => {
         const classExists = user.classes.some(cls => cls && cls.code === classCode);
 
         if (classExists) {
+            const classMembers = await Class.create({
+                // name,
+                // email,
+                // password: hashedPass
+                })
+
             return res.status(200).json({
                 success: true,
                 message: 'Class found'
