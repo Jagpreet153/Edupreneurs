@@ -12,7 +12,7 @@ const PORT= process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors({
-    origin : ["https://edupreneur.vercel.app"],
+    origin : ["https://edupreneurs-frontend.vercel.app/"],
     method : ["GET","POST"],
     credentials:true
 }))
