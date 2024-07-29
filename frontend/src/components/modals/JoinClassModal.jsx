@@ -17,7 +17,7 @@ const JoinClassModal = () => {
       studentEmail: isParent ? studentMail : null,
     }
     try{
-      const response = await axios.post("https://edupreneurs.vercel.app/api/v2/checkClasscode", requestJoinClassData);
+      const response = await axios.post("https://edupreneurs-backend.vercel.app/api/v2/checkClasscode", requestJoinClassData);
       if(response.data.message === 'Class found'){
         toast.success("Class joined successfully");
       }

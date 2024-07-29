@@ -31,7 +31,7 @@ function Signup({ setIsLoggedIn }) {
 
     try {
       const response = await axios.post(
-        "https://edupreneurs.vercel.app/api/v2/duplicateUser",
+        "https://edupreneurs-backend.vercel.app/api/v2/duplicateUser",
         { email }
       );
       if (response.data.exists === true) {
@@ -43,7 +43,7 @@ function Signup({ setIsLoggedIn }) {
           password: password,
         };
         // setUser({name: response.data.name , email: response.data.email})
-        axios.post("https://edupreneurs.vercel.app/api/v2/createUser", details);
+        axios.post("https://edupreneurs-backend.vercel.app/api/v2/createUser", details);
         toast.success("Account created successfully");
         setIsLoggedIn(true);
         navigate("/dashboard");

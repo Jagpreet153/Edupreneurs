@@ -19,7 +19,7 @@ const EditProfileModal = ({ user }) => {
     // };
     // console.log("Form Data:", formData);
     try {
-      const response = await axios.put("https://edupreneurs.vercel.app/api/v2/editProfile", {
+      const response = await axios.put("https://edupreneurs-backend.vercel.app/api/v2/editProfile", {
           name:name,
           email: user?.email,
           gender:gender,

@@ -43,7 +43,7 @@ function TopBar(props) {
     try {
       // Make a request to the server's logout endpoint
       toast.success("Logged out successfully");
-      const response = await axios.get("https://edupreneurs.vercel.app/api/v2/logout");
+      const response = await axios.get("https://edupreneurs-backend.vercel.app/api/v2/logout");
       setIsLoggedIn(false);
       localStorage.removeItem("token");
       setClasses([]);
