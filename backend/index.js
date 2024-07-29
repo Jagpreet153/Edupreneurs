@@ -11,11 +11,13 @@ require("dotenv").config();
 const PORT= process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors({
-    origin : ["https://edupreneurs-frontend.vercel.app/"],
-    method : ["GET","POST"],
-    credentials:true
-}))
+app.use(cors(
+    {
+        origin: ["https://edupreneurs-frontend.vercel.app"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+));
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
