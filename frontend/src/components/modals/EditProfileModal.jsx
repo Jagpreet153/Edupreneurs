@@ -8,6 +8,7 @@ const EditProfileModal = ({ user }) => {
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const { setUser } = useContext(UserContext);
+  axios.defaults.withCredentials = true;
   const handleSaveChanges = async(e) => {
     e.preventDefault();
     // const formData = {
@@ -18,7 +19,7 @@ const EditProfileModal = ({ user }) => {
     // };
     // console.log("Form Data:", formData);
     try {
-      const response = await axios.put("http://localhost:3000/api/v2/editProfile", {
+      const response = await axios.put("https://edupreneurs.vercel.app/api/v2/editProfile", {
           name:name,
           email: user?.email,
           gender:gender,

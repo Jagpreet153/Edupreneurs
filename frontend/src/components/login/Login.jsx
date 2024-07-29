@@ -20,11 +20,11 @@ function Login({ setIsLoggedIn }) {
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
+  axios.defaults.withCredentials = true;
   async function submitHandler(event) {
     event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/v2/checkUser", {
+      const res = await axios.post("https://edupreneurs.vercel.app/api/v2/checkUser", {
         email,
         password,
       });

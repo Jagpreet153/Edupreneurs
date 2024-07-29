@@ -38,12 +38,12 @@ function TopBar(props) {
   // eslint-disable-next-line react/prop-types
   let setIsLoggedIn = props.setIsLoggedIn;
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true;
   const logout = async () => {
     try {
       // Make a request to the server's logout endpoint
       toast.success("Logged out successfully");
-      const response = await axios.get("http://localhost:3000/api/v2/logout");
+      const response = await axios.get("https://edupreneurs.vercel.app/api/v2/logout");
       setIsLoggedIn(false);
       localStorage.removeItem("token");
       setClasses([]);

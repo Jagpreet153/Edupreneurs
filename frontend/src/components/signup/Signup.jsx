@@ -18,7 +18,7 @@ function Signup({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  axios.defaults.withCredentials = true;
   async function submitHandler(event) {
     event.preventDefault();
     const user = { name: name, email: email };
@@ -31,7 +31,7 @@ function Signup({ setIsLoggedIn }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v2/duplicateUser",
+        "https://edupreneurs.vercel.app/api/v2/duplicateUser",
         { email }
       );
       if (response.data.exists === true) {

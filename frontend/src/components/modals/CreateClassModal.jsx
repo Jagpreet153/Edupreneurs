@@ -8,6 +8,7 @@ const CreateClassModal = () => {
   const [className, setClassName] = useState("");
   const [selectedPackage, setSelectedPackage] = useState(ClassPackages[0]);
   const { user,addClass,setClasses } = useContext(UserContext);
+  axios.defaults.withCredentials = true;
   const handleCreateClass = async () => {
     document.getElementById("create_class_modal").close();
         toast.loading("Creating class...");
@@ -24,7 +25,7 @@ const CreateClassModal = () => {
    
 
     try{
-      const response = await axios.post("http://localhost:3000/api/v2/createClass", requestCreateClassData);
+      const response = await axios.post("https://edupreneurs.vercel.app/api/v2/createClass", requestCreateClassData);
       if(response.data.message === 'Class created successfully'){
         toast.dismiss();
         toast.success("Class created successfully"); 
