@@ -15,6 +15,11 @@
       "methods": ["POST"]
     },
     {
+      "src": "/login",
+      "dest": "/checkUser.js",
+      "methods": ["POST"]
+    },
+    {
       "src": "/(.*)",
       "dest": "/",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
