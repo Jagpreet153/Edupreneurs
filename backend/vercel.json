@@ -1,25 +1,46 @@
 {
-    "version":2,
-    "builds": [
-      { "src": "*.js", "use": "@vercel/node" }
-    ],
-    
-    "routes": [
-  {
-    "src": "/(.*)",
-    "dest": "/",
-    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    "headers": {
-      "Access-Control-Allow-Origin": "https://edupreneurs-frontend.vercel.app",
-      "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization",
-      "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-      "Access-Control-Allow-Credentials": "true"
+  "version": 2,
+  "builds": [
+    { "src": "*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    {
+      "src": "/api/signup",
+      "dest": "/api/createUser.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/login",
+      "dest": "/api/checkUser.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     }
-  }
-],
-"functions": {
-  "api/*.js": {
-    "maxDuration": 30
-  }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://edupreneurs-frontend.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
+    }
+  ]
 }
-  }
