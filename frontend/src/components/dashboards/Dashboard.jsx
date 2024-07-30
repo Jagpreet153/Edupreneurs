@@ -1,6 +1,7 @@
 // import Chatbot from "./chatbot/chatbot";
 import { useContext,useEffect, useState} from "react";
 import { UserContext } from "../../userContext";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const { classes,user } = useContext(UserContext);
@@ -40,7 +41,8 @@ function Dashboard() {
                   <p>Parent: {item?.parent? "Enabled" : "Disabled"}</p>
                   <p>Class Code: {item?.code}</p>
                   <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Open</button>
+                    <Link to="/cs101/studentdashboard/rty123">
+                    <button className="btn btn-primary">Open</button></Link>
                   </div>
                 </div>
               </div>
