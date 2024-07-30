@@ -23,11 +23,7 @@ function Login({ setIsLoggedIn }) {
   async function submitHandler(event) {
     event.preventDefault();
     try {
-      const res = await axios.post("https://edupreneurs-backend.vercel.app/api/v2/checkUser", {
-        withCredentials : true,
-        email,
-        password,
-      });
+      const res = await axios.post("http://localhost:3000/api/v2/checkUser", {email,password});
       // Assuming the backend sends user data including name
 
       toast.success("Logged in successfully");
@@ -49,7 +45,7 @@ function Login({ setIsLoggedIn }) {
     }
     toast.loading("Sending OTP...");
     try {
-      const response = await axios.post("https://edupreneurs-backend.vercel.app/api/v2/getotp", {
+      const response = await axios.post("http://localhost:3000/api/v2/getotp", {
         withCredentials : true,
         email: reemail,
       });
@@ -78,7 +74,7 @@ function Login({ setIsLoggedIn }) {
 
     try {
       const response = await axios.post(
-        "https://edupreneurs-backend.vercel.app/api/v2/changePassword",
+        "http://localhost:3000/changePassword",
         {
           withCredentials : true,
           email: reemail,

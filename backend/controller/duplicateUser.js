@@ -4,9 +4,8 @@ const bcrypt = require('bcrypt')
 exports.duplicateUser=async (req,res)=>{
 
     let email= req.body.email;
-
     try {
-        const existingUser = await user.findOne({ email });
+        const existingUser = await user.findOne({email});
         
         if (existingUser) {
           return res.json({ exists: true, message: 'Email is already registered' });
@@ -17,6 +16,5 @@ exports.duplicateUser=async (req,res)=>{
         console.error('Error checking email:',error);
         res.status(500).json({ error: 'Server error' });
       }
-    
 }
 

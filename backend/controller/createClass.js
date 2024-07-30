@@ -55,11 +55,11 @@ exports.createClass=async(req,res)=>{
     user.classes.push(newClass);
     await user.save();
     
-   const classMembers = await Class.create({
-        email: user?.email,
-        participant: null,
-   });
-   console.log(classMembers);
+  //  const classMembers = await Class.create({
+  //       email: user?.email,
+  //       participant: null,
+  //  });
+  //  console.log(classMembers);
     
     res.status(201).json(
       { message: 'Class created successfully', class: newClass }

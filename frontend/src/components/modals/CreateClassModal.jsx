@@ -25,9 +25,8 @@ const CreateClassModal = () => {
    
 
     try{
-      const response = await axios.post("https://edupreneurs-backend.vercel.app/api/v2/createClass",{
-        withCredentials : true,
-         requestCreateClassData});
+      console.log(requestCreateClassData);
+      const response = await axios.post("http://localhost:3000/api/v2/createClass", requestCreateClassData);
       if(response.data.message === 'Class created successfully'){
         toast.dismiss();
         toast.success("Class created successfully"); 

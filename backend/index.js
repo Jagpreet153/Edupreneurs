@@ -12,15 +12,13 @@ const PORT= process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use(cors({
-    origin: 'https://edupreneurs-frontend.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-    optionsSuccessStatus: 200
-}));
-
-
+const corsOptions = {
+    origin: 'http://localhost:5173', 
+    credentials: true
+  };
+  
+app.use(cors(corsOptions));
+  
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
