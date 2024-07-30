@@ -16,5 +16,10 @@
       "Access-Control-Allow-Credentials": "true"
     }
   }
-]
+],
+"functions": {
+  "api/*.js": {
+    "maxDuration": 30
+  }
+}
   }
