@@ -9,7 +9,7 @@ import { IoArrowDown, IoLogOutSharp, IoNotifications } from "react-icons/io5";
 import EditProfileModal from "../modals/EditProfileModal";
 
 function TopBar(props) {
-  const { user } = useContext(UserContext);
+  const { user,setClasses } = useContext(UserContext);
 
   const openModal = () => {
     document.getElementById("edit_profile_modal").showModal();
@@ -38,14 +38,16 @@ function TopBar(props) {
   // eslint-disable-next-line react/prop-types
   let setIsLoggedIn = props.setIsLoggedIn;
   const navigate = useNavigate();
-
+  axios.defaults.withCredentials = true;
   const logout = async () => {
     try {
       // Make a request to the server's logout endpoint
       toast.success("Logged out successfully");
-      const response = await axios.get("http://localhost:3000/api/v2/logout");
+      const response = await axios.get("http://localhost:3000/logout");
       setIsLoggedIn(false);
       localStorage.removeItem("token");
+      setClasses([]);
+      localStorage.removeItem("classes");
       console.log(response.data.message);
       navigate("/");
     } catch (error) {

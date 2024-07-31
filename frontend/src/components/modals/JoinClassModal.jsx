@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../userContext";
-
+import axios from "axios";
+import toast from "react-hot-toast";
 const JoinClassModal = () => {
   const [isParent, setIsParent] = useState(false);
   const [classCode, setClassCode] = useState("");
@@ -14,7 +15,19 @@ const JoinClassModal = () => {
       role: isParent ? "parent" : "student",
       email: user?.email,
       studentEmail: isParent ? studentMail : null,
-    };
+    }
+    try{
+      const response = await axios.post("http://localhost:3000/checkClasscode", {
+       
+        requestJoinClassData});
+      if(response.data.message === 'Class found'){
+        toast.success("Class joined successfully");
+      }
+    }
+    catch(error){
+      console.error("Error joining class:", error);
+      toast.error("Failed to join class");
+    }
   };
 
   return (
@@ -56,7 +69,11 @@ const JoinClassModal = () => {
               />
             </label>
           </div>
-          {isParent ? (
+          {isParent ? 
+           (
+            <div className="hidden"></div>
+          )
+          : (
             <div>
               <label className="input input-bordered flex items-center gap-2">
                 Student Mail ID
@@ -69,8 +86,6 @@ const JoinClassModal = () => {
                 />
               </label>
             </div>
-          ) : (
-            <div className="hidden"></div>
           )}
           <button className="btn btn-secondary mt-4" onClick={handleJoinClass}>
             Join Class

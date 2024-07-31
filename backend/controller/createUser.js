@@ -6,10 +6,12 @@ exports.createUser = async (req, res) => {
   const JWT_SECRET = process.env.JWT_SECRET
 
   try {
-    const { name, email, password } = req.body;
+    const {name, email, password} = req.body;
+
+    const salt = await bcrypt.genSalt(10);
 
     // Hash the password
-    const hashedPass = await bcrypt.hash(password, 10)
+    const hashedPass = await bcrypt.hash(password, salt)
 
     // Create the user
     const newUser = await user.create({
