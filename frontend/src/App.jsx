@@ -14,6 +14,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/dashboards/Dashboard";
 import ParentDashboard from "./components/dashboards/ParentDashboard";
 import StudentDashboard from "./components/dashboards/StudentDashboard";
+import ParentDashboard2 from "./components/dashboards/ParentDashboard2";
+import StudentDashboard2 from "./components/dashboards/StudentDashboard2";
 import TeacherDashboard from "./components/dashboards/TeacherDashboard";
 import Notfound from "./components/Notfound/Notfound";
 import Preloader from "./components/preloader/preloader";
@@ -69,15 +71,55 @@ function App() {
                     </PrivateRoute>
                   }
                 />
-                <Route path="/parentDashboard" element={<ParentDashboard />} />
                 <Route
+                  path="/cs101/teacherdashboard"
+                  element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                      <TeacherDashboard />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/cs101/studentdashboard/rty123"
+                  element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                      <StudentDashboard />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/cs101/studentdashboard/yht564"
+                  element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                      <StudentDashboard2 />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/cs101/parentdashboard/sde451"
+                  element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                      <ParentDashboard />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/cs101/parentdashboard/pyc901"
+                  element={
+                    <PrivateRoute isLoggedIn={isLoggedIn}>
+                      <ParentDashboard2 />
+                    </PrivateRoute>
+                  }
+                />
+                {/* <Route path="/parentDashboard" element={<ParentDashboard />} /> */}
+                {/* <Route
                   path="/studentDashboard"
                   element={<StudentDashboard />}
                 />
                 <Route
                   path="/teacherDashboard"
                   element={<TeacherDashboard />}
-                />
+                /> */}
                 <Route
                   path="/contactus"
                   element={

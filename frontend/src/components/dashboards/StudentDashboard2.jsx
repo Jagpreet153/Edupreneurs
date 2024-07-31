@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
-const ParentDashboard = () => {
+const StudentDashboard = () => {
   const [studentData, setStudentData] = useState({
     name: 'Student A',
-    attendance: [true, false, false, true, false], // Example attendance data
-    marks: [85, 90, 70], // Example marks data
+    attendance: [true, false, true, true, true], // Example attendance data
+    marks: [60, 80, 50], // Example marks data
+    notes: ['Note 1', 'Note 2'], // Example notes
+    studyMaterials: ['Material 1', 'Material 2'], // Example study materials
     messagesFromTeacher: ['Message 1', 'Message 2'], // Example messages from teacher
     messagesToTeacher: [] // Messages sent to teacher
   });
@@ -26,7 +28,7 @@ const ParentDashboard = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Parent Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-4">Student Dashboard</h1>
       
       <div className="bg-white shadow-md rounded p-4 mb-4">
         <h2 className="text-xl font-bold mb-4">Attendance</h2>
@@ -39,6 +41,24 @@ const ParentDashboard = () => {
         <ul>
           {studentData.marks.map((mark, index) => (
             <li key={index}>Exam {index + 1}: {mark}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="bg-white shadow-md rounded p-4 mb-4">
+        <h2 className="text-xl font-bold mb-4">Notes</h2>
+        <ul>
+          {studentData.notes.map((note, index) => (
+            <li key={index}>{note}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="bg-white shadow-md rounded p-4 mb-4">
+        <h2 className="text-xl font-bold mb-4">Study Materials</h2>
+        <ul>
+          {studentData.studyMaterials.map((material, index) => (
+            <li key={index}>{material}</li>
           ))}
         </ul>
       </div>
@@ -74,4 +94,4 @@ const ParentDashboard = () => {
   );
 };
 
-export default ParentDashboard;
+export default StudentDashboard;
