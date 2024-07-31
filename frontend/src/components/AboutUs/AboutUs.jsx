@@ -1,5 +1,9 @@
 // import React from 'react'
 import teamImage from "../../assets/home_svg.svg";
+import jagpreet from "../../assets/jagpreet.jpg";
+import biraj from "../../assets/biraj.jpg";
+import shiwangi from "../../assets/shii.jpg";
+import somya from "../../assets/somya.jpg";
 // import missionImage from "../../assets/comm.jpeg";
 // import visionImage from "../../assets/interactive.jpeg";
 import aboutUsAnim from "./AboutUsAnimation.json";
@@ -98,9 +102,9 @@ function AboutUs() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 text-center">
             <div className="flex flex-col items-center">
               <img
-                src={teamImage}
+                src={jagpreet}
                 alt="Team Member"
-                className="w-40 h-40 rounded-full mb-4"
+                className="w-40 h-40 rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-bold text-secondary">
                 Jagpreet Singh Khurana
@@ -110,9 +114,9 @@ function AboutUs() {
 
             <div className="flex flex-col items-center">
               <img
-                src={teamImage}
+                src={biraj}
                 alt="Team Member"
-                className="w-40 h-40 rounded-full mb-4"
+                className="w-40 h-40 rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-bold text-secondary">
                 Biraj Sanghai
@@ -122,9 +126,9 @@ function AboutUs() {
 
             <div className="flex flex-col items-center">
               <img
-                src={teamImage}
+                src={shiwangi}
                 alt="Team Member"
-                className="w-40 h-40 rounded-full mb-4"
+                className="w-40 h-40 rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-bold text-secondary">Shiwangi</h3>
               <p className="text-base-content">Founder</p>
@@ -132,9 +136,9 @@ function AboutUs() {
 
             <div className="flex flex-col items-center">
               <img
-                src={teamImage}
+                src={somya}
                 alt="Team Member"
-                className="w-40 h-40 rounded-full mb-4"
+                className="w-40 h-40 rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-bold text-secondary">
                 Somya Gangwar
