@@ -3,8 +3,8 @@ import { useState } from 'react';
 const ParentDashboard = () => {
   const [studentData, setStudentData] = useState({
     name: 'Student A',
-    attendance: [true, false, true, true], // Example attendance data
-    marks: [85, 90, 88], // Example marks data
+    attendance: [true, false, false, true, false], // Example attendance data
+    marks: [85, 90, 70], // Example marks data
     messagesFromTeacher: ['Message 1', 'Message 2'], // Example messages from teacher
     messagesToTeacher: [] // Messages sent to teacher
   });

@@ -1,33 +1,65 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../userContext";
+import ClassPackages from "./ClassPackages";
+
 import axios from "axios";
 import toast from "react-hot-toast";
 const JoinClassModal = () => {
   const [isParent, setIsParent] = useState(false);
   const [classCode, setClassCode] = useState("");
   const [studentMail, setStudentMail] = useState("");
-  const { user } = useContext(UserContext);
+  const { user,addClass,setClasses  } = useContext(UserContext);
+  const [selectedPackage, setSelectedPackage] = useState(ClassPackages[0]);
 
   const handleJoinClass = async (e) => {
     e.preventDefault();
-    const requestJoinClassData = {
-      classCode,
-      role: isParent ? "parent" : "student",
+    document.getElementById("create_class_modal").close();
+        toast.loading("Joining class...");
+
+        const role = (() => {
+          if (user?.email === "jagpreet@gmail.com" || user?.email === "shiwangi@gmail.com") {
+            return 'STUDENT';
+          }else {
+            return 'PARENT';
+          }
+        })();
+
+    const requestCreateClassData = {
       email: user?.email,
-      studentEmail: isParent ? studentMail : null,
-    }
+      dateStart: new Date().toISOString(),
+      packageName: "BASIC PACKAGE",
+      className: "cs101",
+      amount: selectedPackage.amount,
+      maxStudents: selectedPackage.maxStudents,
+      parent: selectedPackage.parents,
+      role: role,
+  };
+   
+
     try{
-      const response = await axios.post("http://localhost:3000/checkClasscode", {
-       
-        requestJoinClassData});
-      if(response.data.message === 'Class found'){
-        toast.success("Class joined successfully");
+      console.log(requestCreateClassData);
+      const response = await axios.post("http://localhost:3000/api/v2/createClass", requestCreateClassData);
+      if(response.data.message === 'Class created successfully'){
+        toast.dismiss();
+        toast.success("Class joined successfully"); 
       }
+      const code =await response.data.class.code;
+      const updatedClassData = {
+        ...requestCreateClassData,
+        code: code
+      };
+      addClass(updatedClassData,code);
+
+      // console.log(requestCreateClassData);
+      // const classes =await response.data.class;
+      // await addClass(classes);
     }
     catch(error){
-      console.error("Error joining class:", error);
+      toast.dismiss();
+      console.error("Error creating class:", error);
       toast.error("Failed to join class");
     }
+    
   };
 
   return (
