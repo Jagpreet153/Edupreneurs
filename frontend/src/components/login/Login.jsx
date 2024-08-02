@@ -74,7 +74,7 @@ function Login({ setIsLoggedIn }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/changePassword",
+        "http://localhost:3000/api/v2/changePassword",
         {
           withCredentials : true,
           email: reemail,

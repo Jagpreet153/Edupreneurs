@@ -45,7 +45,7 @@ const Sidebar = (props) => {
       event.preventDefault;
       // Make a request to the server's logout endpoint
       toast.success("Logged out successfully");
-      const response = await axios.get("http://localhost:3000/logout");
+      const response = await axios.get("http://localhost:3000/api/v2/logout");
       setIsLoggedIn(false);
       localStorage.removeItem("token");
       console.log(response.data.message);
